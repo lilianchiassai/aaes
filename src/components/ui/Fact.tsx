@@ -23,10 +23,10 @@ export function FactsStrip({
 }
 
 const factValue = tv({
-  base: "font-impact text-[26px] uppercase mt-1",
+  base: "font-impact text-2xl uppercase mt-1",
   variants: {
     tone: { default: "text-white", hazard: "text-hazard" },
-    size: { default: "", sm: "text-[18px]" },
+    size: { default: "", sm: "text-lg" },
   },
   defaultVariants: { tone: "default", size: "default" },
 });
@@ -44,7 +44,7 @@ export function Fact({
 }) {
   return (
     <div className="bg-ink px-[18px] py-[18px]">
-      <div className="font-cond text-[10px] tracking-[0.16em] uppercase text-fg2">{k}</div>
+      <div className="font-cond text-xs tracking-[0.16em] uppercase text-fg2">{k}</div>
       <div className={factValue({ tone, size })}>{v}</div>
     </div>
   );

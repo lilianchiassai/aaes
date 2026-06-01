@@ -72,25 +72,6 @@ export function SectionTitle({
   );
 }
 
-export function SectionKick({
-  children,
-  className = "",
-}: {
-  children: ReactNode;
-  className?: string;
-}) {
-  return (
-    <span
-      className={
-        "font-cond font-semibold tracking-[0.2em] text-[13px] uppercase text-hazard mb-[10px] block " +
-        className
-      }
-    >
-      {children}
-    </span>
-  );
-}
-
 /* ---- Hazard-tape divider between sections ---- */
 export function TapeDivider() {
   return (

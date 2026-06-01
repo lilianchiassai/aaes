@@ -1,12 +1,31 @@
 import { useEffect, useRef, useState } from "react";
 import { Section, Container, TapeDivider } from "../components/ui/Section";
+import { PageHead } from "../components/ui/PageHead";
+import { Kicker } from "../components/ui/Kicker";
 import { LocationBlock } from "../components/shared/LocationBlock";
 import { UpcomingFacts } from "../components/shared/UpcomingFacts";
 import { siteConfig, UPCOMING } from "../data/site";
 
 const Red = ({ children }: { children: React.ReactNode }) => (
-  <span className="red">{children}</span>
+  <span className="text-hazard font-normal">{children}</span>
 );
+
+/** Numbered hazard-striped step bar (the gate's "01"/"02" headers). */
+function StepHead({ n, title, className = "" }: { n: string; title: string; className?: string }) {
+  return (
+    <div
+      className={
+        "flex items-center gap-[14px] px-6 py-[18px] bg-[repeating-linear-gradient(-45deg,#141414_0_14px,#0c0c0c_14px_28px)] " +
+        className
+      }
+    >
+      <span className="font-display text-3xl text-hazard">{n}</span>
+      <Kicker tone="white" size="lg" className="tracking-[0.08em]">
+        {title}
+      </Kicker>
+    </div>
+  );
+}
 
 export function Inscription() {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -43,31 +62,22 @@ export function Inscription() {
 
   return (
     <>
-      <section className="pagehead py-[60px] bg-[#070707]" data-screen-label="Inscription — En-tête">
-        <Container>
-          <h1>S'inscrire</h1>
-          <p className="lead">
-            Avant de réserver, vous devez lire le règlement et accepter les conditions. Faites
-            défiler le résumé ci-dessous jusqu'au bout, cochez la case, puis l'inscription se
-            débloque.
-          </p>
-        </Container>
-      </section>
+      <PageHead title="S'inscrire" screenLabel="Inscription — En-tête">
+        Avant de réserver, vous devez lire le règlement et accepter les conditions. Faites défiler
+        le résumé ci-dessous jusqu'au bout, cochez la case, puis l'inscription se débloque.
+      </PageHead>
 
       <TapeDivider />
 
       <Section ground="concrete">
-        <Container className="insc">
+        <Container>
           {/* ===== EVENT INFO ===== */}
           <UpcomingFacts className="mb-[24px]" />
           <LocationBlock location={UPCOMING.location} className="mb-[34px]" />
 
           {/* ===== STEP 1 — READ & AGREE ===== */}
-          <div className="gate">
-            <div className="gate__head">
-              <span className="gate__num">01</span>
-              <span className="gate__title">Lisez le règlement</span>
-            </div>
+          <div className="bg-[#0c0c0c] border-2 border-black shadow-hard mb-6">
+            <StepHead n="01" title="Lisez le règlement" className="border-b-2 border-black" />
 
             <div className="gate__scroll" ref={scrollRef}>
               <h4>Présentation</h4>
@@ -139,68 +149,91 @@ export function Inscription() {
               </p>
             </div>
 
-            <div className={"gate__hint" + (read ? " read" : "")}>
+            <div
+              className={
+                "flex items-center gap-[10px] px-[26px] py-3 font-cond text-xs tracking-[0.1em] uppercase transition-colors " +
+                (read ? "text-cyan" : "text-fg2")
+              }
+            >
               {read
                 ? "✓ Règlement lu — vous pouvez accepter"
                 : "↓ Faites défiler le règlement jusqu'en bas pour continuer"}
             </div>
 
-            <div className={"gate__agree" + (agree ? " armed" : "")}>
+            <label
+              htmlFor="agree"
+              className={
+                "px-[26px] py-[18px] flex items-start gap-[14px] bg-black cursor-pointer " +
+                (agree ? "shadow-[inset_0_0_0_2px_var(--color-cyan)]" : "")
+              }
+            >
               <input
                 type="checkbox"
                 id="agree"
                 disabled={!read}
                 checked={agree}
                 onChange={(e) => setAgree(e.target.checked)}
+                className="w-[26px] h-[26px] flex-none accent-hazard mt-[2px] cursor-pointer disabled:cursor-not-allowed"
               />
-              <label htmlFor="agree">
+              <span className="font-body text-lg text-white leading-[1.4]">
                 J'ai lu et j'accepte le règlement de Z Survival Night.
-                <span className="req">
+                <span className="block text-fg2 text-sm mt-[2px]">
                   Obligatoire pour débloquer l'inscription · Interdit aux −16 ans
                 </span>
-              </label>
-            </div>
+              </span>
+            </label>
 
-            <div className={"gate__agree border-t border-hairline" + (agreeAge ? " armed" : "")}>
+            <label
+              htmlFor="agree-age"
+              className={
+                "px-[26px] py-[18px] flex items-start gap-[14px] bg-black border-t border-hairline cursor-pointer " +
+                (agreeAge ? "shadow-[inset_0_0_0_2px_var(--color-cyan)]" : "")
+              }
+            >
               <input
                 type="checkbox"
                 id="agree-age"
                 checked={agreeAge}
                 onChange={(e) => setAgreeAge(e.target.checked)}
+                className="w-[26px] h-[26px] flex-none accent-hazard mt-[2px] cursor-pointer"
               />
-              <label htmlFor="agree-age">
+              <span className="font-body text-lg text-white leading-[1.4]">
                 Je certifie avoir 18 ans ou plus — ou, si j'ai entre 16 et 18 ans, je fournirai une
                 autorisation parentale signée le soir de l'événement.
-                <span className="req">Obligatoire · Interdit aux −16 ans</span>
-              </label>
-            </div>
+                <span className="block text-fg2 text-sm mt-[2px]">
+                  Obligatoire · Interdit aux −16 ans
+                </span>
+              </span>
+            </label>
           </div>
 
           {/* ===== STEP 2 — REGISTER (HelloAsso) ===== */}
-          <div className="gate__head border-2 border-black border-b-0">
-            <span className="gate__num">02</span>
-            <span className="gate__title">Réservez votre place · 15 €</span>
-          </div>
-          <div className={"formwrap" + (unlocked ? " unlocked" : "")}>
-            <div className="formlock">
-              <div className="lk">🔒</div>
-              <div className="t">Inscription verrouillee</div>
-              <div className="s">
-                Lisez le règlement ci-dessus, puis cochez les deux confirmations pour débloquer le
-                formulaire HelloAsso.
+          <StepHead n="02" title="Réservez votre place · 15 €" className="border-2 border-black border-b-0" />
+          <div className="relative border-2 border-black shadow-hard bg-[#0c0c0c] p-2">
+            {!unlocked && (
+              <div className="absolute inset-0 z-[5] bg-[rgba(6,6,6,0.93)] flex flex-col items-center justify-center text-center p-10 gap-[14px] backdrop-blur-[3px]">
+                <div className="text-5xl">🔒</div>
+                <div className="font-display text-4xl uppercase text-white leading-[0.95]">
+                  Inscription verrouillee
+                </div>
+                <div className="font-body text-lg text-grey-100 max-w-[38ch]">
+                  Lisez le règlement ci-dessus, puis cochez les deux confirmations pour débloquer le
+                  formulaire HelloAsso.
+                </div>
               </div>
-            </div>
+            )}
             <iframe
               ref={iframeRef}
               title="Inscription HelloAsso"
               allowTransparency
               scrolling="auto"
               src={siteConfig.helloAssoWidget}
-              style={{ width: "100%", height: "750px", border: "none" }}
+              className="block w-full border-0 bg-white"
+              style={{ height: "750px" }}
             />
           </div>
 
-          <p className="font-cond text-[12px] tracking-[0.08em] uppercase text-fg2 mt-4 text-center">
+          <p className="font-cond text-xs tracking-[0.08em] uppercase text-fg2 mt-4 text-center">
             Paiement sécurisé via HelloAsso
           </p>
         </Container>

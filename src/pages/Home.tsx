@@ -1,6 +1,8 @@
 import { Section, Container, SectionHead, SectionTitle } from "../components/ui/Section";
 import { Button } from "../components/ui/Button";
 import { Badge } from "../components/ui/Badge";
+import { Lead } from "../components/ui/Lead";
+import { Kicker } from "../components/ui/Kicker";
 import { LocationBlock } from "../components/shared/LocationBlock";
 import { UpcomingFacts } from "../components/shared/UpcomingFacts";
 import { EventCard } from "../components/events/EventCard";
@@ -25,38 +27,53 @@ export function Home() {
   return (
     <>
       {/* ============ HERO ============ */}
-      <section className="hero" data-screen-label="Accueil — Hero">
+      <section className="relative overflow-hidden bg-black z-[1]" data-screen-label="Accueil — Hero">
         <img className="hero__art" src={assetUrl("zombie-hand-recto.png")} alt="" />
-        <div className="hero__btmfade" />
-        <Container className="hero__inner">
-          <div className="hero__lead">
-            <div className="hero__countdown">
-              <span className="lbl">Les zombies reviennent dans</span>
-              <div className="hero__cd-row">
-                <div className="hero__cd-cell">
-                  <div className="n">{cd.days}</div>
-                  <div className="l">Jours</div>
-                </div>
-                <div className="hero__cd-cell">
-                  <div className="n">{cd.hours}</div>
-                  <div className="l">Heures</div>
-                </div>
-                <div className="hero__cd-cell">
-                  <div className="n">{cd.minutes}</div>
-                  <div className="l">Minutes</div>
-                </div>
+        <div className="absolute left-0 right-0 bottom-0 z-[2] pointer-events-none h-[100px] bg-[linear-gradient(180deg,transparent,#000_92%)]" />
+        <Container className="relative z-[3] min-h-[120vh] flex flex-col justify-center pt-[clamp(80px,14vh,170px)] pb-[clamp(120px,18vh,220px)] gap-[clamp(28px,4vh,52px)]">
+          <div className="relative flex flex-col gap-[clamp(88px,17vh,200px)]">
+            <div className="flex flex-col items-center gap-[18px] text-center mx-auto w-full">
+              <span className="font-cond font-semibold tracking-[0.28em] uppercase text-[clamp(15px,1.8vw,20px)] text-cyan">
+                Les zombies reviennent dans
+              </span>
+              <div className="flex gap-[clamp(12px,1.6vw,20px)]">
+                {[
+                  { n: cd.days, l: "Jours" },
+                  { n: cd.hours, l: "Heures" },
+                  { n: cd.minutes, l: "Minutes" },
+                ].map((c) => (
+                  <div
+                    key={c.l}
+                    className="bg-[rgba(0,0,0,0.5)] border border-[rgba(39,194,230,0.55)] px-[clamp(18px,2.4vw,32px)] py-[clamp(14px,1.8vw,22px)] min-w-[clamp(96px,12vw,140px)]"
+                  >
+                    <div className="font-impact text-[clamp(48px,7vw,84px)] text-cyan leading-none">
+                      {c.n}
+                    </div>
+                    <div className="font-cond text-[clamp(11px,1.1vw,13px)] tracking-[0.16em] uppercase text-grey-100 mt-[6px]">
+                      {c.l}
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
-            <div className="hero__titleblock">
-              <div className="hero__kicker">{UPCOMING.kicker}</div>
-              <h1 className="hero__title">Z Survival Night</h1>
+            <div>
+              <Kicker size="sm" className="block tracking-[0.24em] mb-[14px]">
+                {UPCOMING.kicker}
+              </Kicker>
+              <h1 className="font-display text-9xl max-[560px]:text-6xl leading-[0.82] uppercase text-white mt-0 mb-[6px] max-w-[11ch]">
+                Z Survival Night
+              </h1>
             </div>
           </div>
 
-          <div className="hero__details">
-            <div className="hero__date">{UPCOMING.dateLong}</div>
-            <p className="hero__sub">{UPCOMING.heroBlurb}</p>
-            <div className="hero__cta">
+          <div>
+            <div className="font-impact text-[clamp(28px,3.8vw,52px)] text-hazard uppercase tracking-[0.01em] leading-none mt-2 mb-[6px]">
+              {UPCOMING.dateLong}
+            </div>
+            <p className="font-body text-xl text-grey-100 max-w-[64ch] mt-5 mb-4 leading-[1.5]">
+              {UPCOMING.heroBlurb}
+            </p>
+            <div className="flex gap-4 flex-wrap items-center mt-[14px]">
               <Button variant="primary" to="/inscription">
                 S'inscrire · {UPCOMING.priceLabel}
               </Button>
@@ -64,7 +81,7 @@ export function Home() {
                 Lire les règles
               </Button>
             </div>
-            <div className="hero__meta">
+            <div className="flex gap-[10px] mt-7 flex-wrap">
               <Badge variant="hazard">{UPCOMING.durationLabel}</Badge>
               <Badge variant="black">{UPCOMING.participantsLabel}</Badge>
               <Badge variant="outline">
@@ -118,7 +135,7 @@ export function Home() {
             </Button>
           </SectionHead>
 
-          <div className="events">
+          <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-[22px]">
             {HOME_CARDS.map((c) => (
               <EventCard key={c.title} {...c} />
             ))}
@@ -134,10 +151,10 @@ export function Home() {
             <br />
             de survivre&nbsp;?
           </SectionTitle>
-          <p className="lead mx-auto mt-[18px] mb-[28px]">
+          <Lead className="mx-auto mt-[18px] mb-[28px]">
             Les places sont limitées. Lisez le règlement, acceptez les conditions, puis réservez
             votre nuit.
-          </p>
+          </Lead>
           <div className="flex gap-4 justify-center flex-wrap">
             <Button variant="cyan" to="/inscription">
               S'inscrire · {UPCOMING.priceLabel}

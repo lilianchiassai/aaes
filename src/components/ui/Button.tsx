@@ -4,7 +4,7 @@ import type { ComponentProps, ReactNode } from "react";
 
 const button = tv({
   base: [
-    "inline-block font-impact uppercase tracking-[0.02em] text-[20px] leading-none",
+    "inline-block font-impact uppercase tracking-[0.02em] text-xl leading-none",
     "px-[30px] py-[14px] border-2 border-black cursor-pointer no-underline rounded-none",
     "transition-[transform,box-shadow,background,color] duration-100 ease-out",
   ],

@@ -4,9 +4,9 @@ import { assetUrl } from "../../lib/assets";
 import { siteConfig } from "../../data/site";
 
 const colLink =
-  "font-body text-[19px] text-grey-100 no-underline block mb-2 leading-[1.45] hover:text-hazard";
+  "font-body text-lg text-grey-100 no-underline block mb-2 leading-[1.45] hover:text-hazard";
 const colHead =
-  "font-cond font-semibold text-[12px] tracking-[0.16em] uppercase text-hazard m-0 mb-[14px]";
+  "font-cond font-semibold text-xs tracking-[0.16em] uppercase text-hazard m-0 mb-[14px]";
 
 export function Footer({ extraLegal }: { extraLegal?: string }) {
   return (
@@ -16,9 +16,9 @@ export function Footer({ extraLegal }: { extraLegal?: string }) {
           <div>
             <div className="flex items-center gap-3 mb-[14px]">
               <img src={assetUrl("logo-aaes.png")} alt="AAES" className="w-[50px] h-[50px]" />
-              <b className="font-display text-[28px] text-white uppercase leading-none">AAES</b>
+              <b className="font-display text-3xl text-white uppercase leading-none">AAES</b>
             </div>
-            <p className="font-body text-[19px] text-grey-100 leading-[1.45] m-0">
+            <p className="font-body text-lg text-grey-100 leading-[1.45] m-0">
               Amicale des Amateurs
               <br />
               d'Excursions Scénarisées
@@ -57,16 +57,16 @@ export function Footer({ extraLegal }: { extraLegal?: string }) {
             >
               Parc du Biez, Mondeville
             </a>
-            <p className="font-body text-[19px] text-grey-300 m-0">Réseaux sociaux à venir</p>
+            <p className="font-body text-lg text-grey-300 m-0">Réseaux sociaux à venir</p>
           </div>
         </div>
 
         <div className="mt-[34px] pt-[18px] border-t border-hairline flex justify-between gap-4 flex-wrap">
-          <span className="font-cond text-[11px] tracking-[0.12em] uppercase text-grey-300">
+          <span className="font-cond text-xs tracking-[0.12em] uppercase text-grey-300">
             © 2026 AAES — Z Survival Night
           </span>
           {extraLegal && (
-            <span className="font-cond text-[11px] tracking-[0.12em] uppercase text-grey-300">
+            <span className="font-cond text-xs tracking-[0.12em] uppercase text-grey-300">
               {extraLegal}
             </span>
           )}

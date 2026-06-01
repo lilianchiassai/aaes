@@ -1,40 +1,53 @@
 import { Section, Container, SectionHead, SectionTitle, TapeDivider } from "../components/ui/Section";
 import { Button } from "../components/ui/Button";
+import { PageHead } from "../components/ui/PageHead";
+import { Kicker } from "../components/ui/Kicker";
 import { EventCard2 } from "../components/events/EventCard2";
 import { eventsByYear } from "../data/events";
 import { UPCOMING } from "../data/site";
+
+function Recap({ n, l }: { n: React.ReactNode; l: string }) {
+  return (
+    <div className="flex items-baseline gap-3">
+      <span className="font-impact text-4xl text-cyan leading-none min-w-[90px]">{n}</span>
+      <span className="font-cond text-sm tracking-[0.1em] uppercase text-grey-100">{l}</span>
+    </div>
+  );
+}
 
 export function Events() {
   const groups = eventsByYear();
 
   return (
     <>
-      <section className="pagehead py-[60px] bg-[#070707]" data-screen-label="Événements — En-tête">
-        <Container>
-          <h1>Evenements</h1>
-          <p className="lead">
-            De la Vallée des Jardins au Parc du Biez, retour sur les nuits où l'AAES a lâché la
-            horde — et l'édition qui marque le grand retour. Cliquez une édition pour ses photos et
-            les témoignages des participants.
-          </p>
-        </Container>
-      </section>
+      <PageHead title="Evenements" screenLabel="Événements — En-tête">
+        De la Vallée des Jardins au Parc du Biez, retour sur les nuits où l'AAES a lâché la horde —
+        et l'édition qui marque le grand retour. Cliquez une édition pour ses photos et les
+        témoignages des participants.
+      </PageHead>
 
       <TapeDivider />
 
       <Section ground="concrete">
         <Container>
           {/* ===== FEATURED 2026 (cyan) ===== */}
-          <div className="feat" data-screen-label="Événements — 2026 à venir">
-            <div className="feat__head">
-              <div className="feat__txt">
-                <div className="feat__date">À venir · Samedi 12 septembre 2026 · 20h00</div>
-                <div className="feat__name">
+          <div
+            className="overflow-hidden bg-[#0b0b0b] border-2 border-cyan shadow-[8px_8px_0_#000,0_0_40px_rgba(39,194,230,0.22)] mb-[54px]"
+            data-screen-label="Événements — 2026 à venir"
+          >
+            <div className="grid grid-cols-[1.2fr_0.8fr] max-zmd:grid-cols-1">
+              <div className="px-9 py-[34px]">
+                <Kicker tone="cyan" className="block tracking-[0.18em]">
+                  À venir · Samedi 12 septembre 2026 · 20h00
+                </Kicker>
+                <div className="font-display text-[clamp(36px,4.6vw,60px)] uppercase text-white leading-[0.9] mt-2 mb-[14px]">
                   Z Survival Night
                   <br />
                   2026
                 </div>
-                <p className="feat__blurb">{UPCOMING.featuredBlurb}</p>
+                <p className="font-body text-lg text-grey-100 leading-[1.6] max-w-[54ch]">
+                  {UPCOMING.featuredBlurb}
+                </p>
                 <div className="mt-5 flex gap-[14px] flex-wrap">
                   <Button variant="primary" to="/inscription">
                     S'inscrire · 15 €
@@ -44,23 +57,11 @@ export function Events() {
                   </Button>
                 </div>
               </div>
-              <div className="feat__recap">
-                <div className="recap__row">
-                  <span className="recap__n text-cyan">15 €</span>
-                  <span className="recap__l">L'inscription</span>
-                </div>
-                <div className="recap__row">
-                  <span className="recap__n text-cyan">+16</span>
-                  <span className="recap__l">Âge minimum</span>
-                </div>
-                <div className="recap__row">
-                  <span className="recap__n text-cyan">+3h</span>
-                  <span className="recap__l">De jeu, en pleine nuit</span>
-                </div>
-                <div className="recap__row">
-                  <span className="recap__n text-cyan text-[22px]">Parc du Biez</span>
-                  <span className="recap__l">Mondeville</span>
-                </div>
+              <div className="bg-black border-l-4 border-cyan px-7 py-6 flex flex-col justify-center gap-[14px]">
+                <Recap n="15 €" l="L'inscription" />
+                <Recap n="+16" l="Âge minimum" />
+                <Recap n="+3h" l="De jeu, en pleine nuit" />
+                <Recap n={<span className="text-2xl">Parc du Biez</span>} l="Mondeville" />
               </div>
             </div>
           </div>
@@ -75,12 +76,14 @@ export function Events() {
           </SectionHead>
 
           {groups.map((g) => (
-            <div className="yeargroup" key={g.year}>
-              <div className="yeargroup__head">
-                <span className="yeargroup__yr">{g.year}</span>
-                <div className="yeargroup__rule" />
+            <div className="mb-[60px]" key={g.year}>
+              <div className="flex items-center gap-[18px] mb-6">
+                <span className="font-display text-[clamp(48px,8vw,96px)] text-white leading-[0.8]">
+                  {g.year}
+                </span>
+                <div className="flex-1 h-[3px] bg-[repeating-linear-gradient(-45deg,var(--color-hazard)_0_9px,#000_9px_18px)]" />
               </div>
-              <div className="pcards2">
+              <div className="grid grid-cols-2 max-[880px]:grid-cols-1 gap-6">
                 {g.events.map((ev) => (
                   <EventCard2 ev={ev} key={ev.id} />
                 ))}

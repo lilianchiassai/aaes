@@ -4,7 +4,7 @@ import { Container } from "../ui/Section";
 import { assetUrl } from "../../lib/assets";
 
 const linkBase =
-  "font-cond font-semibold text-[14px] tracking-[0.14em] uppercase no-underline px-3 py-2 border-2 border-transparent transition-[color,border-color,background] duration-100";
+  "font-cond font-semibold text-sm tracking-[0.14em] uppercase no-underline px-3 py-2 border-2 border-transparent transition-[color,border-color,background] duration-100";
 
 function navClass({ isActive }: { isActive: boolean }) {
   return (
@@ -38,7 +38,7 @@ export function Header() {
             alt="AAES"
             className="w-[46px] h-[46px] [filter:drop-shadow(2px_2px_0_#000)]"
           />
-          <b className="font-display text-[26px] text-white uppercase tracking-[0.02em] leading-none">
+          <b className="font-display text-2xl text-white uppercase tracking-[0.02em] leading-none">
             AAES
           </b>
         </Link>
@@ -47,7 +47,7 @@ export function Header() {
           type="button"
           aria-label="Menu"
           onClick={() => setOpen((o) => !o)}
-          className="znav:hidden ml-auto bg-transparent border-2 border-hazard text-hazard font-impact text-[18px] px-3 py-[6px] cursor-pointer"
+          className="znav:hidden ml-auto bg-transparent border-2 border-hazard text-hazard font-impact text-lg px-3 py-[6px] cursor-pointer"
         >
           MENU
         </button>
