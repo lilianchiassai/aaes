@@ -9,7 +9,7 @@ const container = tv({
   variants: {
     width: {
       default: "max-w-[1180px]",
-      article: "max-w-[1000px]",
+      article: "max-w-[960px]",
       narrow: "max-w-[880px]",
     },
   },

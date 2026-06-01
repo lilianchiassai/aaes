@@ -70,7 +70,7 @@ export function Inscription() {
       <TapeDivider />
 
       <Section ground="concrete">
-        <Container>
+        <Container width="article">
           {/* ===== EVENT INFO ===== */}
           <UpcomingFacts className="mb-6" />
           <LocationBlock location={UPCOMING.location} className="mb-8" />
@@ -79,7 +79,10 @@ export function Inscription() {
           <div className="bg-[#0c0c0c] border-2 border-black shadow-hard mb-6">
             <StepHead n="01" title="Lisez le règlement" className="border-b-2 border-black" />
 
-            <div className="gate__scroll" ref={scrollRef}>
+            <div
+              ref={scrollRef}
+              className="max-h-[300px] overflow-y-auto px-[26px] py-6 border-b border-dashed border-hairline [scrollbar-width:thin] [&_h4]:font-cond [&_h4]:font-semibold [&_h4]:uppercase [&_h4]:tracking-[0.08em] [&_h4]:text-hazard [&_h4]:text-[13px] [&_h4]:mt-[18px] [&_h4]:mb-2 [&_h4:first-child]:mt-0 [&_p]:font-body [&_p]:text-[19px] [&_p]:text-grey-100 [&_p]:leading-[1.55] [&_li]:font-body [&_li]:text-[19px] [&_li]:text-grey-100 [&_li]:leading-[1.55] [&_ul]:mb-[6px] [&_ul]:pl-[18px]"
+            >
               <h4>Présentation</h4>
               <p>
                 Au cours d'un Zombie Survival, vous êtes confronté à une invasion zombie. Livré à
