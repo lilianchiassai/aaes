@@ -4,7 +4,8 @@ import { PageHead } from "../components/ui/PageHead";
 import { Kicker } from "../components/ui/Kicker";
 import { LocationBlock } from "../components/shared/LocationBlock";
 import { UpcomingFacts } from "../components/shared/UpcomingFacts";
-import { siteConfig, UPCOMING } from "../data/site";
+import { InscriptionStatus } from "../components/shared/InscriptionStatus";
+import { siteConfig, UPCOMING, inscriptionIsOpen } from "../data/site";
 
 const Red = ({ children }: { children: React.ReactNode }) => (
   <span className="text-hazard font-normal">{children}</span>
@@ -35,6 +36,7 @@ export function Inscription() {
   const [agreeAge, setAgreeAge] = useState(false);
 
   const unlocked = agree && agreeAge;
+  const open = inscriptionIsOpen();
 
   // Unlock the first checkbox once the rules summary is scrolled to the end
   // (or immediately if it fits without scrolling).
@@ -63,8 +65,9 @@ export function Inscription() {
   return (
     <>
       <PageHead title="S'inscrire" screenLabel="Inscription — En-tête">
-        Avant de réserver, vous devez lire le règlement et accepter les conditions. Faites défiler
-        le résumé ci-dessous jusqu'au bout, cochez la case, puis l'inscription se débloque.
+        {open
+          ? "Avant de réserver, vous devez lire le règlement et accepter les conditions. Faites défiler le résumé ci-dessous jusqu'au bout, cochez la case, puis l'inscription se débloque."
+          : "La billetterie de l'édition 2026 n'est pas encore en ligne. Voici les infos pratiques — et comment être prévenu dès l'ouverture."}
       </PageHead>
 
       <TapeDivider />
@@ -75,6 +78,10 @@ export function Inscription() {
           <UpcomingFacts className="mb-6" />
           <LocationBlock location={UPCOMING.location} className="mb-8" />
 
+          {!open && <InscriptionStatus />}
+
+          {open && (
+          <>
           {/* ===== STEP 1 — READ & AGREE ===== */}
           <div className="bg-[#0c0c0c] border-2 border-black shadow-hard mb-6">
             <StepHead n="01" title="Lisez le règlement" className="border-b-2 border-black" />
@@ -239,6 +246,8 @@ export function Inscription() {
           <p className="font-cond text-xs tracking-[0.08em] uppercase text-fg2 mt-4 text-center">
             Paiement sécurisé via HelloAsso
           </p>
+          </>
+          )}
         </Container>
       </Section>
     </>

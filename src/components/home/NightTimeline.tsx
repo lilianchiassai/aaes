@@ -8,7 +8,7 @@ import splat05 from "../../assets/img/splatters/splat-05.svg";
 /* Human + zombie silhouettes (paths ported from index.html). */
 function HumanFig() {
   return (
-    <svg className="fig fig--human" viewBox="0 0 50 116">
+    <svg className="block h-[26px] w-auto fill-hazard [filter:drop-shadow(1.5px_2px_0_rgba(0,0,0,.55))]" viewBox="0 0 50 116">
       <circle cx="25" cy="13" r="11.5" />
       <path d="M25 26 C16 26 12 30 11 39 L7 69 C6.4 73 12 74 13 70 L17 43 L19 43 L18 73 C16 81 14 103 14 108 C14 113 22 113 22.6 108 L24.4 80 L25.6 80 L27.4 108 C28 113 36 113 36 108 C36 103 34 81 32 73 L31 43 L33 43 L37 70 C38 74 43.6 73 43 69 L39 39 C38 30 34 26 25 26 Z" />
     </svg>
@@ -16,7 +16,7 @@ function HumanFig() {
 }
 function ZombieFig() {
   return (
-    <svg className="fig fig--zombie" viewBox="0 0 96 120">
+    <svg className="block h-[26px] w-auto fill-cyan [filter:drop-shadow(1.5px_2px_0_rgba(0,0,0,.55))]" viewBox="0 0 96 120">
       <path d="M30 80 L16 116 L26 116 L41 86 Z" />
       <path d="M40 84 L50 116 L60 116 L51 88 Z" />
       <path d="M27 34 C19 46 22 64 36 82 C43 90 52 88 49 79 C42 64 41 50 46 40 C50 31 31 27 27 34 Z" />
@@ -39,38 +39,74 @@ const SPLATTERS: Record<string, string> = {
 function Splatter({ n }: { n: string }) {
   const src = SPLATTERS[n];
   if (!src) return null;
-  return <img className="tl4__splat" src={src} alt="" aria-hidden="true" />;
+  return (
+    <img
+      className="absolute inset-0 z-0 pointer-events-none block w-full h-full"
+      src={src}
+      alt=""
+      aria-hidden="true"
+    />
+  );
 }
+
+/* Alternating column card with a connector stub (::after) and dot (::before)
+   reaching the central spine; the dot colour comes from the --dot custom
+   prop. Desktop (zmd:, ≥760px) lays the cards in two alternating columns;
+   mobile (max-zmd:, <760px) stacks them to the right of a left-aligned spine.
+   The two breakpoints are split across non-overlapping min/max media queries
+   so neither cascade order nor specificity can let one leak into the other. */
+const CARD =
+  "relative border-2 border-black bg-[rgba(8,8,8,.85)] shadow-[5px_5px_0_#000] " +
+  "after:content-[''] after:absolute after:top-6 after:h-[3px] after:bg-black after:z-[1] " +
+  "before:content-[''] before:absolute before:top-[25.5px] before:w-3.5 before:h-3.5 before:rounded-full " +
+  "before:border-2 before:border-black before:bg-[var(--dot,#888)] before:shadow-[0_0_0_3px_#0b0b0b] before:-translate-y-1/2 before:z-[2] " +
+  // desktop ≥760: two alternating columns
+  "zmd:w-[calc(50%-42px)] zmd:[&:nth-child(odd)]:self-start zmd:[&:nth-child(even)]:self-end zmd:[&:not(:first-child)]:mt-[-58px] " +
+  "zmd:after:w-[42px] zmd:[&:nth-child(odd)]:after:right-[-42px] zmd:[&:nth-child(even)]:after:left-[-42px] " +
+  "zmd:[&:nth-child(odd)]:before:right-[-51px] zmd:[&:nth-child(even)]:before:left-[-51px] " +
+  // mobile <760: single column right of the left-aligned spine
+  "max-zmd:w-auto max-zmd:self-stretch max-zmd:ml-12 max-zmd:[&:not(:first-child)]:mt-4 " +
+  "max-zmd:after:w-8 max-zmd:after:left-[-32px] max-zmd:before:left-[-39px]";
 
 function StageCard({ s }: { s: TimelineStage }) {
   const onDark = s.zombie / (s.human + s.zombie) >= 0.5;
   return (
-    <div className="tl4__card" style={{ "--dot": s.color } as React.CSSProperties}>
-      <div className="tl4__tab" style={{ background: s.color, color: onDark ? "#fff" : "#000" }}>
+    <div data-tl-card className={CARD} style={{ "--dot": s.color } as React.CSSProperties}>
+      <div
+        className="relative overflow-hidden flex items-center gap-[11px] px-[14px] py-2 border-b-2 border-black"
+        style={{ background: s.color, color: onDark ? "#fff" : "#000" }}
+      >
         <Splatter n={s.n} />
-        <span className="tl4__num">{s.n}</span>
-        <span className="tl4__ttl">{s.title}</span>
+        <span className="relative z-[1] font-display text-[27px] leading-[.78]">{s.n}</span>
+        <span className="relative z-[1] font-impact text-[23px] uppercase tracking-[0.01em] leading-none">
+          {s.title}
+        </span>
       </div>
-      <div className="tl4__body">
-        <div className="crowd">
+      <div className="pt-[13px] px-4 pb-[15px]">
+        <div className="flex flex-wrap items-end gap-[2px] mb-[11px] min-h-0">
           {s.human > 0 && (
-            <div className="crowd__g">
+            <div className="flex flex-wrap items-end gap-1">
               {Array.from({ length: s.human }, (_, i) => (
                 <HumanFig key={i} />
               ))}
             </div>
           )}
           {s.zombie > 0 && (
-            <div className="crowd__g">
+            <div className="flex flex-wrap items-end gap-1">
               {Array.from({ length: s.zombie }, (_, i) => (
                 <ZombieFig key={i} />
               ))}
             </div>
           )}
         </div>
-        <ul className="tl4__list">
+        <ul className="list-none m-0 p-0 flex flex-col gap-[6px]">
           {s.bullets.map((b, i) => (
-            <li key={i}>{b}</li>
+            <li
+              key={i}
+              className="font-body font-light text-[19px] text-grey-100 leading-[1.4] pl-[15px] relative before:content-[''] before:absolute before:left-0 before:top-[7px] before:w-[6px] before:h-[6px] before:bg-[var(--dot,var(--color-hazard))] before:rotate-45"
+            >
+              {b}
+            </li>
           ))}
         </ul>
       </div>
@@ -88,7 +124,7 @@ export function NightTimeline() {
       const rows = rowsRef.current;
       const spine = spineRef.current;
       if (!rows || !spine) return;
-      const cards = rows.querySelectorAll<HTMLElement>(".tl4__card");
+      const cards = rows.querySelectorAll<HTMLElement>("[data-tl-card]");
       const last = cards[cards.length - 1];
       if (!last) return;
       const y = rows.offsetTop + last.offsetTop + 24;
@@ -108,9 +144,12 @@ export function NightTimeline() {
   }, []);
 
   return (
-    <div className="tl4">
-      <div className="tl4__spine" ref={spineRef} />
-      <div className="tl4__rows" ref={rowsRef}>
+    <div className="relative max-w-[1060px] mx-auto mt-[6px] py-[4px]">
+      <div
+        ref={spineRef}
+        className="absolute zmd:left-1/2 max-zmd:left-[22px] top-[6px] bottom-[6px] w-3 -translate-x-1/2 border-2 border-black shadow-hard z-0 bg-[linear-gradient(180deg,#f5e000_2%,#c6cf33_27%,#3fc6a6_50%,#0e7790_74%,#1fa6cf_98%)]"
+      />
+      <div ref={rowsRef} className="relative z-[2] flex flex-col items-stretch">
         {STAGES.map((s) => (
           <StageCard key={s.n} s={s} />
         ))}

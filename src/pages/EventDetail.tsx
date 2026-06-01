@@ -10,7 +10,7 @@ import { QuoteCard } from "../components/ui/QuoteCard";
 import { Kicker } from "../components/ui/Kicker";
 import { FilmImg } from "../components/ui/FilmImg";
 import { getEvent } from "../data/events";
-import { photoUrl } from "../lib/assets";
+import { photoUrl, youtubeThumb } from "../lib/assets";
 
 export function EventDetail() {
   const { id } = useParams();
@@ -41,9 +41,15 @@ export function EventDetail() {
         className="relative overflow-hidden bg-[#070707] pt-[66px] pb-[52px]"
         data-screen-label="Événement — En-tête"
       >
-        <div className="absolute inset-0 opacity-[0.22]">
-          <FilmImg src={photoUrl(ev.photos[0])} alt="" className="contrast-[1.25]" />
-        </div>
+        {(ev.photos[0] || ev.trailer) && (
+          <div className="absolute inset-0 opacity-[0.22]">
+            <FilmImg
+              src={ev.photos[0] ? photoUrl(ev.photos[0]) : youtubeThumb(ev.trailer!)}
+              alt=""
+              className="contrast-[1.25]"
+            />
+          </div>
+        )}
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.55),#070707)]" />
         <Container className="relative">
           <Button

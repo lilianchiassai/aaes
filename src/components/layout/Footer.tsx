@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Container } from "../ui/Section";
+import { FacebookIcon, InstagramIcon } from "../ui/icons";
 import { assetUrl } from "../../lib/assets";
 import { siteConfig } from "../../data/site";
 
@@ -57,7 +58,26 @@ export function Footer({ extraLegal }: { extraLegal?: string }) {
             >
               Parc du Biez, Mondeville
             </a>
-            <p className="font-body text-lg text-grey-300 m-0">Réseaux sociaux à venir</p>
+            <div className="flex items-center gap-[14px] mt-3">
+              <a
+                href={siteConfig.social.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook AAES"
+                className="text-grey-100 hover:text-hazard transition-colors"
+              >
+                <FacebookIcon className="w-5 h-5" />
+              </a>
+              <a
+                href={siteConfig.social.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram AAES"
+                className="text-grey-100 hover:text-hazard transition-colors"
+              >
+                <InstagramIcon className="w-5 h-5" />
+              </a>
+            </div>
           </div>
         </div>
 

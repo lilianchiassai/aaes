@@ -70,7 +70,9 @@ export function EventCard2({ ev }: { ev: ZEvent }) {
         </div>
       ) : (
         <div className="relative overflow-hidden bg-black aspect-video">
-          <FilmImg dim className={HERO} src={photoUrl(ev.photos[0])} alt={ev.name} />
+          {ev.photos[0] && (
+            <FilmImg dim className={HERO} src={photoUrl(ev.photos[0])} alt={ev.name} />
+          )}
           <Ribbon>{ev.dateShort}</Ribbon>
         </div>
       )}

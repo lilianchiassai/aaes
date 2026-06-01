@@ -1,5 +1,27 @@
 # effects.css → Tailwind / shared components — migration plan
 
+> **Status: COMPLETE — `src/styles/effects.css` has been deleted.** The earlier
+> plan (below) kept a "Bucket 3" residue of awkward motifs in CSS. That residue
+> has since been inlined into its owning components as Tailwind arbitrary
+> utilities/variants, with no component-scoped CSS file remaining:
+> - `.hero__art` → `pages/Home.tsx` (`[mask-image:…]`, `mix-blend-screen`)
+> - `.joint`/`.pbanner*`/`.ptape*`/`.pstripe*` → `components/home/ParallaxBanner.tsx`
+> - `.crowd`/`.fig*`/`.tl4*` → `components/home/NightTimeline.tsx`
+> - `.gate__scroll` → `pages/Inscription.tsx` (`[&_h4]:…`, `[scrollbar-width:thin]`)
+>
+> The four DOM-query JS hooks (`.hero__art`, `.pbanner`, `.pbanner__parallax`,
+> `.tl4__card`) became `data-*` attributes (`data-parallax-hero`,
+> `data-parallax-banner`, `data-factor`, `data-tl-card`).
+>
+> **Gotcha for future arbitrary-variant work:** Tailwind v4 does **not** emit
+> `max-*` (max-width) media rules after the unprefixed rules — they land *before*
+> them. Relying on source order + specificity-matched `:nth-child` overrides (as
+> the original media query did) silently breaks. The timeline's responsive reflow
+> instead splits desktop vs mobile across **non-overlapping** `zmd:` (min-width)
+> and `max-zmd:` (max-width) queries, so cascade order can't matter.
+
+---
+
 Goal: shrink `src/styles/effects.css` to the minimum — only the rules that genuinely
 can't (or shouldn't) be expressed as Tailwind utilities. Everything else moves either
 **inline into its single owning component** or into a **small shared component / `@utility`**.

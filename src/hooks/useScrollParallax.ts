@@ -9,10 +9,10 @@ import { useEffect } from "react";
  */
 export function useScrollParallax() {
   useEffect(() => {
-    const heroArt = document.querySelector<HTMLElement>(".hero__art");
-    const pbanner = document.querySelector<HTMLElement>(".pbanner");
+    const heroArt = document.querySelector<HTMLElement>("[data-parallax-hero]");
+    const pbanner = document.querySelector<HTMLElement>("[data-parallax-banner]");
     const layers = Array.from(
-      document.querySelectorAll<HTMLElement>(".pbanner__parallax"),
+      document.querySelectorAll<HTMLElement>("[data-factor]"),
     ).map((el) => ({ el, factor: parseFloat(el.dataset.factor || "0.08") }));
 
     if (!heroArt && !pbanner) return;

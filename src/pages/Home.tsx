@@ -6,30 +6,38 @@ import { Stack } from "../components/ui/Stack";
 import { Kicker } from "../components/ui/Kicker";
 import { LocationBlock } from "../components/shared/LocationBlock";
 import { UpcomingFacts } from "../components/shared/UpcomingFacts";
+import { InscriptionStatus } from "../components/shared/InscriptionStatus";
 import { EventCard } from "../components/events/EventCard";
 import { ParallaxBanner } from "../components/home/ParallaxBanner";
 import { NightTimeline } from "../components/home/NightTimeline";
+import { LockIcon } from "../components/ui/icons";
 import { useCountdown } from "../hooks/useCountdown";
 import { useScrollParallax } from "../hooks/useScrollParallax";
-import { UPCOMING } from "../data/site";
+import { UPCOMING, inscriptionIsOpen } from "../data/site";
 import { assetUrl } from "../lib/assets";
 
 /* Home "Éditions passées" preview cards (curated subset, like the prototype). */
 const HOME_CARDS = [
   { to: "/event/2019-zsn", photo: "2019-2", ribbon: "29 Juin 2019", kicker: "Z Survival Night", title: "Edition 2019", locationLines: ["Parc du Biez", "Mondeville"], stat: "200" },
-  { to: "/event/2018-zsn", photo: "2018-3", ribbon: "2018", kicker: "Z Survival Night · 2 dates", title: "Edition 2018", locationLines: ["Parc du Biez", "Mondeville"], stat: "150" },
+  { to: "/event/2018-zsn-juin", photo: "2018-3", ribbon: "2018", kicker: "Z Survival Night · 2 nuits", title: "Edition 2018", locationLines: ["Parc du Biez", "Mondeville"], stat: "150" },
   { to: "/event/2017-zsn", photo: "2017-2", ribbon: "24 Juin 2017", kicker: "Z Survival Night", title: "Edition 2017", locationLines: ["Vallée des Jardins", "Caen"], stat: "300" },
 ] as const;
 
 export function Home() {
   const cd = useCountdown(UPCOMING.countdownTarget);
   useScrollParallax();
+  const open = inscriptionIsOpen();
 
   return (
     <>
       {/* ============ HERO ============ */}
       <section className="relative overflow-hidden bg-black z-[1]" data-screen-label="Accueil — Hero">
-        <img className="hero__art" src={assetUrl("zombie-hand-recto.png")} alt="" />
+        <img
+          data-parallax-hero
+          className="absolute right-[-2%] top-1/2 -translate-y-1/2 h-[95%] z-[1] opacity-90 pointer-events-none mix-blend-screen will-change-transform [filter:grayscale(1)_contrast(1.25)_brightness(.9)] [-webkit-mask-image:linear-gradient(90deg,transparent_0%,rgba(0,0,0,.35)_22%,#000_48%)] [mask-image:linear-gradient(90deg,transparent_0%,rgba(0,0,0,.35)_22%,#000_48%)]"
+          src={assetUrl("zombie-hand-recto.png")}
+          alt=""
+        />
         <div className="absolute left-0 right-0 bottom-0 z-[2] pointer-events-none h-[100px] bg-[linear-gradient(180deg,transparent,#000_92%)]" />
         <Container className="relative z-[3] min-h-[120vh] flex flex-col justify-center pt-[clamp(80px,14vh,170px)] pb-[clamp(120px,18vh,220px)] gap-[clamp(28px,4vh,52px)]">
           <div className="relative flex flex-col gap-[clamp(88px,17vh,200px)]">
@@ -75,9 +83,15 @@ export function Home() {
               {UPCOMING.heroBlurb}
             </p>
             <div className="flex gap-4 flex-wrap items-center mt-[14px]">
-              <Button variant="primary" to="/inscription">
-                S'inscrire · {UPCOMING.priceLabel}
-              </Button>
+              {open ? (
+                <Button variant="primary" to="/inscription">
+                  S'inscrire · {UPCOMING.priceLabel}
+                </Button>
+              ) : (
+                <span className="inline-flex items-center gap-[10px] font-impact uppercase text-lg leading-none px-[22px] py-[13px] border-2 border-cyan text-cyan">
+                  <LockIcon /> Inscriptions dès le {UPCOMING.inscriptionOpenLabel}
+                </span>
+              )}
               <Button variant="ghost" to="/regles">
                 Lire les règles
               </Button>
@@ -147,25 +161,35 @@ export function Home() {
       </Section>
 
       {/* ============ CTA BAND ============ */}
-      <Section ground="black" className="text-center" data-screen-label="Accueil — CTA">
+      <Section
+        ground="black"
+        className={open ? "text-center" : ""}
+        data-screen-label="Accueil — CTA"
+      >
         <Container>
-          <SectionTitle font="display">
-            Choisirez-vous
-            <br />
-            de survivre&nbsp;?
-          </SectionTitle>
-          <Lead className="mx-auto mt-5 mb-7">
-            Les places sont limitées. Lisez le règlement, acceptez les conditions, puis réservez
-            votre nuit.
-          </Lead>
-          <div className="flex gap-4 justify-center flex-wrap">
-            <Button variant="cyan" to="/inscription">
-              S'inscrire · {UPCOMING.priceLabel}
-            </Button>
-            <Button variant="ghost" to="/regles">
-              Lire les règles
-            </Button>
-          </div>
+          {open ? (
+            <>
+              <SectionTitle font="display">
+                Choisirez-vous
+                <br />
+                de survivre&nbsp;?
+              </SectionTitle>
+              <Lead className="mx-auto mt-5 mb-7">
+                Les places sont limitées. Lisez le règlement, acceptez les conditions, puis réservez
+                votre nuit.
+              </Lead>
+              <div className="flex gap-4 justify-center flex-wrap">
+                <Button variant="cyan" to="/inscription">
+                  S'inscrire · {UPCOMING.priceLabel}
+                </Button>
+                <Button variant="ghost" to="/regles">
+                  Lire les règles
+                </Button>
+              </div>
+            </>
+          ) : (
+            <InscriptionStatus />
+          )}
         </Container>
       </Section>
     </>
