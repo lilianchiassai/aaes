@@ -7,21 +7,19 @@ import { Kicker } from "../components/ui/Kicker";
 import { LocationBlock } from "../components/shared/LocationBlock";
 import { UpcomingFacts } from "../components/shared/UpcomingFacts";
 import { InscriptionStatus } from "../components/shared/InscriptionStatus";
-import { EventCard } from "../components/events/EventCard";
+import { EventCard2 } from "../components/events/EventCard2";
 import { ParallaxBanner } from "../components/home/ParallaxBanner";
 import { NightTimeline } from "../components/home/NightTimeline";
 import { LockIcon } from "../components/ui/icons";
 import { useCountdown } from "../hooks/useCountdown";
 import { useScrollParallax } from "../hooks/useScrollParallax";
 import { UPCOMING, inscriptionIsOpen } from "../data/site";
+import { ZEVENTS } from "../data/events";
 import { assetUrl } from "../lib/assets";
 
-/* Home "Éditions passées" preview cards (curated subset, like the prototype). */
-const HOME_CARDS = [
-  { to: "/event/2019-zsn", photo: "2019-2", ribbon: "29 Juin 2019", kicker: "Z Survival Night", title: "Edition 2019", locationLines: ["Parc du Biez", "Mondeville"], stat: "200" },
-  { to: "/event/2018-zsn-juin", photo: "2018-3", ribbon: "2018", kicker: "Z Survival Night · 2 nuits", title: "Edition 2018", locationLines: ["Parc du Biez", "Mondeville"], stat: "150" },
-  { to: "/event/2017-zsn", photo: "2017-2", ribbon: "24 Juin 2017", kicker: "Z Survival Night", title: "Edition 2017", locationLines: ["Vallée des Jardins", "Caen"], stat: "300" },
-] as const;
+/* Home "Éditions passées" preview — the 3 most recent editions
+   (ZEVENTS is ordered newest-first). */
+const HOME_EVENTS = ZEVENTS.slice(0, 3);
 
 export function Home() {
   const cd = useCountdown(UPCOMING.countdownTarget);
@@ -152,9 +150,9 @@ export function Home() {
             </Button>
           </SectionHead>
 
-          <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-[22px]">
-            {HOME_CARDS.map((c) => (
-              <EventCard key={c.title} {...c} />
+          <div className="grid grid-cols-3 max-[880px]:grid-cols-2 max-[560px]:grid-cols-1 gap-6">
+            {HOME_EVENTS.map((ev) => (
+              <EventCard2 ev={ev} preview key={ev.id} />
             ))}
           </div>
         </Container>

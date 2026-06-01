@@ -32,7 +32,11 @@ export function useScrollParallax() {
           }
         }
         if (heroArt) {
-          heroArt.style.transform = `translateY(calc(-50% + ${y * 0.5}px))`;
+          // The class `-translate-y-1/2` already centres the art via the CSS
+          // `translate` property (Tailwind v4). Only contribute scroll drift
+          // here through `transform`, which composes with `translate` — adding
+          // `-50%` again would stack and push the art up by its full height.
+          heroArt.style.transform = `translateY(${y * 0.5}px)`;
           const prog = Math.min(1, Math.max(0, y / (vh * 0.4)));
           heroArt.style.filter =
             `grayscale(${(1 - prog).toFixed(3)}) contrast(${(1.25 - prog * 0.15).toFixed(3)}) ` +

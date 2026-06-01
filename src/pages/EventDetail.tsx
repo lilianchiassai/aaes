@@ -6,16 +6,16 @@ import { FactsStrip, Fact } from "../components/ui/Fact";
 import { Lightbox } from "../components/ui/Lightbox";
 import { Lead } from "../components/ui/Lead";
 import { Stack } from "../components/ui/Stack";
-import { QuoteCard } from "../components/ui/QuoteCard";
 import { Kicker } from "../components/ui/Kicker";
 import { FilmImg } from "../components/ui/FilmImg";
 import { getEvent } from "../data/events";
-import { photoUrl, youtubeThumb } from "../lib/assets";
+import { photoUrl, youtubeThumb, youtubeEmbed } from "../lib/assets";
 
 export function EventDetail() {
   const { id } = useParams();
   const ev = getEvent(id);
   const [lightbox, setLightbox] = useState<string | null>(null);
+  const [trailerPlaying, setTrailerPlaying] = useState(false);
 
   useEffect(() => {
     if (ev) document.title = `${ev.name} — Z Survival Night · AAES`;
@@ -93,18 +93,43 @@ export function EventDetail() {
         </Container>
       </Section>
 
-      {/* ===== RÉCITS / QUOTES ===== */}
-      {ev.quotes.length > 0 && (
+      {/* ===== BANDE-ANNONCE ===== */}
+      {ev.trailer && (
         <Section ground="concrete" flushTop>
           <Container width="article">
             <Stack gap="lg">
               <SectionTitle>
-                Ils <em>y étaient</em>
+                La <em>bande-annonce</em>
               </SectionTitle>
-              <div className="grid grid-cols-[repeat(auto-fit,minmax(290px,1fr))] gap-[18px]">
-                {ev.quotes.map((q, i) => (
-                  <QuoteCard key={i} variant="card" text={q.text} author={q.author} />
-                ))}
+              <div
+                className="group/media relative overflow-hidden bg-black aspect-video border-2 border-black shadow-[5px_5px_0_rgba(0,0,0,0.45)] cursor-pointer"
+                onClick={() => setTrailerPlaying(true)}
+              >
+                {trailerPlaying ? (
+                  <iframe
+                    className="absolute inset-0 w-full h-full border-0"
+                    src={youtubeEmbed(ev.trailer)}
+                    title={`${ev.name} — bande-annonce`}
+                    allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+                    allowFullScreen
+                  />
+                ) : (
+                  <>
+                    <FilmImg
+                      src={youtubeThumb(ev.trailer)}
+                      alt={`${ev.name} — bande-annonce`}
+                      className="grayscale-[0.65] contrast-[1.2] opacity-90 transition-[transform,filter,opacity] duration-300 group-hover/media:grayscale-0 group-hover/media:opacity-100 group-hover/media:scale-105"
+                    />
+                    <span
+                      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[3] w-16 h-16 flex items-center justify-center bg-blood-bright text-white border-2 border-black shadow-[4px_4px_0_rgba(0,0,0,0.6)] transition-transform duration-150 group-hover/media:scale-[1.08]"
+                      aria-label="Lire la bande-annonce"
+                    >
+                      <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </span>
+                  </>
+                )}
               </div>
             </Stack>
           </Container>
