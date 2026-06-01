@@ -2,16 +2,29 @@ import { tv, type VariantProps } from "tailwind-variants";
 import type { HTMLAttributes, ReactNode } from "react";
 
 /* ---- Container ---- */
+/* Centered page-width wrapper. `width` is the content measure; positioning /
+   flex layout still come from className (tailwind-merged). */
+const container = tv({
+  base: "w-full mx-auto px-[28px]",
+  variants: {
+    width: {
+      default: "max-w-[1180px]",
+      article: "max-w-[1000px]",
+      narrow: "max-w-[880px]",
+    },
+  },
+  defaultVariants: { width: "default" },
+});
+
 export function Container({
+  width,
   children,
-  className = "",
-}: {
+  className,
+}: VariantProps<typeof container> & {
   children: ReactNode;
   className?: string;
 }) {
-  return (
-    <div className={"w-full max-w-[1180px] mx-auto px-[28px] " + className}>{children}</div>
-  );
+  return <div className={container({ width, className })}>{children}</div>;
 }
 
 /* ---- Section grounds ---- */
@@ -24,6 +37,7 @@ const section = tv({
       ink: "bg-[linear-gradient(#0c0c0c,#040404)]",
     },
     tightTop: { true: "pt-[60px]" },
+    flushTop: { true: "pt-0" },
   },
   defaultVariants: { ground: "concrete" },
 });
@@ -31,6 +45,7 @@ const section = tv({
 export function Section({
   ground,
   tightTop,
+  flushTop,
   className,
   children,
   ...rest
@@ -39,7 +54,7 @@ export function Section({
   children: ReactNode;
 } & HTMLAttributes<HTMLElement>) {
   return (
-    <section className={section({ ground, tightTop, className })} {...rest}>
+    <section className={section({ ground, tightTop, flushTop, className })} {...rest}>
       {children}
     </section>
   );
@@ -52,24 +67,25 @@ export function SectionHead({ children }: { children: ReactNode }) {
   );
 }
 
-/** Title with hazard-coloured <em> support: pass JSX or use the `em` className via children. */
+/** Title with hazard-coloured <em> support: pass JSX or use the `em` className
+    via children. `font` switches between the impact and display faces. */
+const sectionTitle = tv({
+  base: "text-[clamp(34px,5.2vw,62px)] uppercase leading-[0.92] text-white m-0 [&_em]:text-hazard [&_em]:not-italic",
+  variants: {
+    font: { impact: "font-impact", display: "font-display" },
+  },
+  defaultVariants: { font: "impact" },
+});
+
 export function SectionTitle({
+  font,
   children,
-  className = "",
-}: {
+  className,
+}: VariantProps<typeof sectionTitle> & {
   children: ReactNode;
   className?: string;
 }) {
-  return (
-    <h2
-      className={
-        "font-impact text-[clamp(34px,5.2vw,62px)] uppercase leading-[0.92] text-white m-0 [&_em]:text-hazard [&_em]:not-italic " +
-        className
-      }
-    >
-      {children}
-    </h2>
-  );
+  return <h2 className={sectionTitle({ font, className })}>{children}</h2>;
 }
 
 /* ---- Hazard-tape divider between sections ---- */

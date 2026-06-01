@@ -40,7 +40,7 @@ export function Rules() {
       <TapeDivider />
 
       <Section ground="concrete">
-        <Container className="max-w-[880px]">
+        <Container width="narrow">
           <RuleBlock title="Presentation">
             <RuleItem>
               Au cours d'un Zombie Survival, les participants sont confrontés à une invasion zombie.

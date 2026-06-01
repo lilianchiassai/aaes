@@ -33,9 +33,9 @@ export function EventCard({
   statLabel = "Participants",
 }: EventCardProps) {
   return (
-    <Card to={to} className="no-underline">
+    <Card to={to}>
       <div className="relative h-[172px] overflow-hidden bg-black">
-        <FilmImg src={photoUrl(photo)} alt="" className="opacity-80" />
+        <FilmImg dim src={photoUrl(photo)} alt="" />
         <Ribbon>{ribbon}</Ribbon>
       </div>
       <div className="flex flex-col gap-2 flex-1 px-5 py-[18px]">

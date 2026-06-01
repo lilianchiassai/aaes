@@ -22,11 +22,11 @@ export function LocationBlock({
       }
     >
       <div className="p-[30px]">
-        <Kicker size="sm" className="block mb-[10px] tracking-[0.2em]">Lieu de l'invasion</Kicker>
-        <h3 className="font-display text-[clamp(30px,4vw,46px)] uppercase text-white leading-[0.9] mt-[6px] mb-3">
+        <Kicker size="sm" tracking="wide" className="block mb-2.5">Lieu de l'invasion</Kicker>
+        <h3 className="font-display text-[clamp(30px,4vw,46px)] uppercase text-white leading-[0.9] mt-1.5 mb-3">
           {location.venue}
         </h3>
-        <Lead className="mb-[18px]">{location.addressNote}</Lead>
+        <Lead className="mb-5">{location.addressNote}</Lead>
         <Button variant="ghost" href={location.mapsUrl} target="_blank" rel="noopener">
           Ouvrir dans Google Maps ↗
         </Button>

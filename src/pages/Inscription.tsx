@@ -20,7 +20,7 @@ function StepHead({ n, title, className = "" }: { n: string; title: string; clas
       }
     >
       <span className="font-display text-3xl text-hazard">{n}</span>
-      <Kicker tone="white" size="lg" className="tracking-[0.08em]">
+      <Kicker tone="white" size="lg" tracking="tight">
         {title}
       </Kicker>
     </div>
@@ -72,8 +72,8 @@ export function Inscription() {
       <Section ground="concrete">
         <Container>
           {/* ===== EVENT INFO ===== */}
-          <UpcomingFacts className="mb-[24px]" />
-          <LocationBlock location={UPCOMING.location} className="mb-[34px]" />
+          <UpcomingFacts className="mb-6" />
+          <LocationBlock location={UPCOMING.location} className="mb-8" />
 
           {/* ===== STEP 1 — READ & AGREE ===== */}
           <div className="bg-[#0c0c0c] border-2 border-black shadow-hard mb-6">

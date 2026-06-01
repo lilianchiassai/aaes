@@ -2,6 +2,7 @@ import { Section, Container, SectionHead, SectionTitle } from "../components/ui/
 import { Button } from "../components/ui/Button";
 import { Badge } from "../components/ui/Badge";
 import { Lead } from "../components/ui/Lead";
+import { Stack } from "../components/ui/Stack";
 import { Kicker } from "../components/ui/Kicker";
 import { LocationBlock } from "../components/shared/LocationBlock";
 import { UpcomingFacts } from "../components/shared/UpcomingFacts";
@@ -57,7 +58,7 @@ export function Home() {
               </div>
             </div>
             <div>
-              <Kicker size="sm" className="block tracking-[0.24em] mb-[14px]">
+              <Kicker size="sm" tracking="wider" className="block mb-3.5">
                 {UPCOMING.kicker}
               </Kicker>
               <h1 className="font-display text-9xl max-[560px]:text-6xl leading-[0.82] uppercase text-white mt-0 mb-[6px] max-w-[11ch]">
@@ -116,8 +117,10 @@ export function Home() {
               <SectionTitle>Le rendez-vous</SectionTitle>
             </div>
           </SectionHead>
-          <UpcomingFacts className="mb-[28px]" />
-          <LocationBlock location={UPCOMING.location} />
+          <Stack gap="lg">
+            <UpcomingFacts />
+            <LocationBlock location={UPCOMING.location} />
+          </Stack>
         </Container>
       </Section>
 
@@ -146,12 +149,12 @@ export function Home() {
       {/* ============ CTA BAND ============ */}
       <Section ground="black" className="text-center" data-screen-label="Accueil — CTA">
         <Container>
-          <SectionTitle className="font-display">
+          <SectionTitle font="display">
             Choisirez-vous
             <br />
             de survivre&nbsp;?
           </SectionTitle>
-          <Lead className="mx-auto mt-[18px] mb-[28px]">
+          <Lead className="mx-auto mt-5 mb-7">
             Les places sont limitées. Lisez le règlement, acceptez les conditions, puis réservez
             votre nuit.
           </Lead>

@@ -37,7 +37,7 @@ export function Events() {
           >
             <div className="grid grid-cols-[1.2fr_0.8fr] max-zmd:grid-cols-1">
               <div className="px-9 py-[34px]">
-                <Kicker tone="cyan" className="block tracking-[0.18em]">
+                <Kicker tone="cyan" tracking="wide" className="block">
                   À venir · Samedi 12 septembre 2026 · 20h00
                 </Kicker>
                 <div className="font-display text-[clamp(36px,4.6vw,60px)] uppercase text-white leading-[0.9] mt-2 mb-[14px]">

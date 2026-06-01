@@ -11,7 +11,7 @@ import { Ribbon } from "../ui/Ribbon";
 import { QuoteCard } from "../ui/QuoteCard";
 
 const STAT_LABEL = "font-cond text-xs tracking-[0.12em] uppercase text-fg2 mt-1";
-const HERO = "absolute inset-0 opacity-[0.82] transition-transform duration-300 group-hover/card:scale-105";
+const HERO = "absolute inset-0 transition-transform duration-300 group-hover/card:scale-105";
 
 function Stat({ n, label }: { n: ReactNode; label: ReactNode }) {
   return (
@@ -37,6 +37,7 @@ export function EventCard2({ ev }: { ev: ZEvent }) {
           onClick={() => setPlaying(true)}
         >
           <FilmImg
+            dim
             className={
               HERO +
               " group-hover/media:grayscale-[0.4] group-hover/media:contrast-[1.2] group-hover/media:opacity-95"
@@ -69,7 +70,7 @@ export function EventCard2({ ev }: { ev: ZEvent }) {
         </div>
       ) : (
         <div className="relative overflow-hidden bg-black aspect-video">
-          <FilmImg className={HERO} src={photoUrl(ev.photos[0])} alt={ev.name} />
+          <FilmImg dim className={HERO} src={photoUrl(ev.photos[0])} alt={ev.name} />
           <Ribbon>{ev.dateShort}</Ribbon>
         </div>
       )}
@@ -103,7 +104,7 @@ export function EventCard2({ ev }: { ev: ZEvent }) {
           </div>
         </div>
         {q && <QuoteCard variant="inline" text={q.text} author={q.author} />}
-        <Kicker className="tracking-[0.14em] mt-auto">Voir l'événement →</Kicker>
+        <Kicker className="mt-auto">Voir l'événement →</Kicker>
       </Link>
     </Card>
   );
