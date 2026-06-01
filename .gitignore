@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Design handoff bundle (reference only — not part of the built app)
+zsurvivalnight
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

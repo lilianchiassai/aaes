@@ -1,111 +1,123 @@
-:root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+@import "tailwindcss";
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+/* ============================================================
+   AAES — Z SURVIVAL NIGHT
+   Tailwind v4 theme — ported from colors_and_type.css tokens.
+   Theme keys become utilities: --color-blood → bg-blood/text-blood/border-blood,
+   --font-display → font-display, --text-display → text-display, etc.
+   ============================================================ */
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
+/* ---------- Fonts (bundled from src/assets so Vite base-prefixes + hashes) ---------- */
+@font-face {
+  font-family: "28 Days Later";
+  src: url("./assets/fonts/28_Days_Later.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Akzidenz Grotesk Cond";
+  src: url("./assets/fonts/AkzidenzGrotesk-LightCond.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Big Noodle Titling";
+  src: url("./assets/fonts/big_noodle_titling.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
+@theme {
+  /* ============ COLOR — Core palette ============ */
+  --color-ink: #0d0d0d;
+  --color-black: #000000;
+  --color-paper: #f4f2ec;
+  --color-white: #ffffff;
 
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
+  /* ============ COLOR — Brand signals ============ */
+  --color-blood: #b51e26;
+  --color-blood-bright: #e5141b;
+  --color-blood-deep: #7d141a;
+  --color-hazard: #f5e000;
+  --color-hazard-dim: #c9b800;
+  --color-cyan: #27c2e6;
+
+  /* ============ COLOR — Zombie greyscale ramp ============ */
+  --color-grey-900: #161616;
+  --color-grey-700: #2a2a2a;
+  --color-grey-500: #4d4d4d;
+  --color-grey-300: #8a8a8a;
+  --color-grey-100: #c4c4c4;
+
+  /* Semantic aliases (kept for parity with the prototype's intent) */
+  --color-fg2: #8a8a8a; /* secondary / meta text === grey-300 */
+  --color-hairline: rgba(255, 255, 255, 0.14);
+
+  /* ============ TYPE — Families ============ */
+  --font-display: "28 Days Later", "Big Noodle Titling", sans-serif;
+  --font-impact: "Big Noodle Titling", sans-serif;
+  --font-cond: "Big Noodle Titling", "Akzidenz Grotesk Cond", sans-serif;
+  --font-body: "Akzidenz Grotesk Cond", sans-serif;
+
+  /* ============ TYPE — Scale (fluid) ============ */
+  --text-display: clamp(56px, 9vw, 132px);
+  --text-h1: clamp(40px, 6vw, 76px);
+  --text-h2: clamp(30px, 4vw, 48px);
+  --text-h3: clamp(22px, 2.4vw, 30px);
+  --text-tape: clamp(24px, 3vw, 44px);
+  --text-body: 18px;
+  --text-small: 14px;
+  --text-micro: 11px;
+
+  /* ============ RADII — hard-edged brand ============ */
+  --radius-0: 0px;
+  --radius-1: 2px;
+  --radius-2: 4px;
+
+  /* ============ ELEVATION ============ */
+  --shadow-hard: 6px 6px 0 #000;
+  --shadow-card: 0 8px 28px rgba(0, 0, 0, 0.55);
+  --shadow-glow: 0 0 24px rgba(229, 20, 27, 0.45);
+
+  /* breakpoints to match prototype media queries */
+  --breakpoint-zmd: 760px;
+  --breakpoint-znav: 860px;
 }
 
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
+/* ============ Base ============ */
+html {
+  scroll-behavior: smooth;
 }
-
 body {
   margin: 0;
+  color: var(--color-white);
+  font-family: var(--font-body);
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  background: #3a3a3a url("./assets/img/concrete-texture.png") center / cover fixed;
+}
+img {
+  display: block;
 }
 
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
+/* page-wide film grain (rugged) */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
+@media (max-width: 860px) {
+  /* fixed-attachment is costly on mobile — fall back to scroll */
+  body {
+    background-attachment: scroll;
   }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-p {
-  margin: 0;
-}
-
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
-}
-
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
 }
