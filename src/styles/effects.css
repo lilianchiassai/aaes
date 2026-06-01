@@ -126,13 +126,12 @@
 /* ---------- Location / map ---------- */
 .loc { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 2px solid #000; box-shadow: var(--shadow-hard); background: #0c0c0c; }
 .loc__info { padding: 30px 30px; }
-.loc__map { position: relative; min-height: 260px; background: #111; border-left: 2px solid #000; display: flex; align-items: center; justify-content: center; text-decoration: none; overflow: hidden; }
-.loc__map .grid { position: absolute; inset: 0; opacity: .5; background-image: linear-gradient(rgba(245,224,0,.10) 1px, transparent 1px), linear-gradient(90deg, rgba(245,224,0,.10) 1px, transparent 1px); background-size: 38px 38px; }
-.loc__pin { position: relative; z-index: 2; text-align: center; }
-.loc__pin .ico { font-size: 40px; }
-.loc__pin .lbl { font-family: var(--font-impact); font-size: 20px; color: var(--hazard); text-transform: uppercase; margin-top: 6px; }
-.loc__pin .sub { font-family: var(--font-cond); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--grey-100); margin-top: 4px; }
-.loc__map:hover .loc__pin .ico { transform: scale(1.08); }
+.loc__map { position: relative; min-height: 260px; background: #111; border-left: 2px solid #000; overflow: hidden; }
+.loc__map iframe {
+  position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block;
+  /* dark-mode the keyless Google embed so it fits the night palette */
+  filter: invert(0.9) hue-rotate(180deg) brightness(0.95) contrast(0.9) grayscale(0.3);
+}
 
 /* ---------- Home event card grid (.ecard) ---------- */
 .events { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 22px; }

@@ -4,6 +4,20 @@
    in the prototype; lifted here so there is one source of truth.
    ============================================================ */
 
+/** A venue + its map, reusable by any edition (drives <LocationBlock />). */
+export interface EventLocation {
+  /** Venue name, e.g. "Parc du Biez". */
+  venue: string;
+  city: string;
+  postalCode?: string;
+  /** Paragraph shown under the venue name (directions, parking, etc.). */
+  addressNote: string;
+  /** Link target for the "open in Google Maps" button. */
+  mapsUrl: string;
+  /** Keyless Google Maps embed URL for the <iframe> (q=…&output=embed). */
+  mapsEmbedUrl: string;
+}
+
 export interface UpcomingEdition {
   kicker: string;
   title: string;
@@ -12,9 +26,7 @@ export interface UpcomingEdition {
   dateLong: string;
   dateShort: string;
   time: string;
-  location: string;
-  city: string;
-  postalCode: string;
+  location: EventLocation;
   durationLabel: string;
   participantsLabel: string;
   ageLabel: string;
@@ -23,6 +35,16 @@ export interface UpcomingEdition {
   featuredBlurb: string;
 }
 
+const PARC_DU_BIEZ: EventLocation = {
+  venue: "Parc du Biez",
+  city: "Mondeville",
+  postalCode: "14120",
+  addressNote:
+    "Mondeville (14120). Rendez-vous à l'entrée du parc dès 19h45. Stationnement à proximité — venez équipés pour la boue et la nuit.",
+  mapsUrl: "https://maps.app.goo.gl/GLzU4qhYdh8LCHRG8",
+  mapsEmbedUrl: "https://www.google.com/maps?q=Parc+du+Biez,+Mondeville+14120&output=embed",
+};
+
 export const UPCOMING: UpcomingEdition = {
   kicker: "L'AAES présente · Édition 2026",
   title: "Z Survival Night",
@@ -30,9 +52,7 @@ export const UPCOMING: UpcomingEdition = {
   dateLong: "Sam. 12 Septembre 2026 · 20h00",
   dateShort: "Sam. 12 sept.",
   time: "20h00",
-  location: "Parc du Biez",
-  city: "Mondeville",
-  postalCode: "14120",
+  location: PARC_DU_BIEZ,
   durationLabel: "+3 heures",
   participantsLabel: "100 participants",
   ageLabel: "+16 ans",
@@ -44,7 +64,7 @@ export const UPCOMING: UpcomingEdition = {
 };
 
 export const siteConfig = {
-  mapsUrl: "https://maps.app.goo.gl/GLzU4qhYdh8LCHRG8",
+  mapsUrl: PARC_DU_BIEZ.mapsUrl,
   helloAssoWidget:
     "https://www.helloasso.com/associations/amicale-des-amateurs-d-excursions-scenarisees-aaes/evenements/z-survival-night-12-septembre-2026-1/widget",
   associationName: "Amicale des Amateurs d'Excursions Scénarisées",

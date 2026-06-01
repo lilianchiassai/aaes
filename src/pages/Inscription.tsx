@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Section, Container, TapeDivider } from "../components/ui/Section";
-import { FactsStrip, Fact } from "../components/ui/Fact";
 import { LocationBlock } from "../components/shared/LocationBlock";
-import { siteConfig } from "../data/site";
+import { UpcomingFacts } from "../components/shared/UpcomingFacts";
+import { siteConfig, UPCOMING } from "../data/site";
 
 const Red = ({ children }: { children: React.ReactNode }) => (
   <span className="red">{children}</span>
@@ -59,14 +59,8 @@ export function Inscription() {
       <Section ground="concrete">
         <Container className="insc">
           {/* ===== EVENT INFO ===== */}
-          <FactsStrip className="mb-[24px]">
-            <Fact k="Date" v="Sam. 12 sept." />
-            <Fact k="Heure" v="20h00" />
-            <Fact k="Durée" v="+3 heures" />
-            <Fact k="Âge" v="+16 ans" />
-            <Fact k="Tarif" v="15 €" tone="hazard" />
-          </FactsStrip>
-          <LocationBlock className="mb-[34px]" />
+          <UpcomingFacts className="mb-[24px]" />
+          <LocationBlock location={UPCOMING.location} className="mb-[34px]" />
 
           {/* ===== STEP 1 — READ & AGREE ===== */}
           <div className="gate">

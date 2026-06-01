@@ -1,21 +1,21 @@
-import { Link } from "react-router-dom";
 import { Section, Container, SectionHead, SectionTitle } from "../components/ui/Section";
 import { Button } from "../components/ui/Button";
 import { Badge } from "../components/ui/Badge";
-import { FactsStrip, Fact } from "../components/ui/Fact";
 import { LocationBlock } from "../components/shared/LocationBlock";
+import { UpcomingFacts } from "../components/shared/UpcomingFacts";
+import { EventCard } from "../components/events/EventCard";
 import { ParallaxBanner } from "../components/home/ParallaxBanner";
 import { NightTimeline } from "../components/home/NightTimeline";
 import { useCountdown } from "../hooks/useCountdown";
 import { useScrollParallax } from "../hooks/useScrollParallax";
 import { UPCOMING } from "../data/site";
-import { assetUrl, photoUrl } from "../lib/assets";
+import { assetUrl } from "../lib/assets";
 
 /* Home "Éditions passées" preview cards (curated subset, like the prototype). */
 const HOME_CARDS = [
-  { photo: "2019-2", ribbon: "29 Juin 2019", k: "Z Survival Night", t: "Edition 2019", loc: ["Parc du Biez", "Mondeville"], stat: "200" },
-  { photo: "2018-3", ribbon: "2018", k: "Z Survival Night · 2 dates", t: "Edition 2018", loc: ["Parc du Biez", "Mondeville"], stat: "150" },
-  { photo: "2017-2", ribbon: "24 Juin 2017", k: "Z Survival Night", t: "Edition 2017", loc: ["Vallée des Jardins", "Caen"], stat: "300" },
+  { to: "/event/2019-zsn", photo: "2019-2", ribbon: "29 Juin 2019", kicker: "Z Survival Night", title: "Edition 2019", locationLines: ["Parc du Biez", "Mondeville"], stat: "200" },
+  { to: "/event/2018-zsn", photo: "2018-3", ribbon: "2018", kicker: "Z Survival Night · 2 dates", title: "Edition 2018", locationLines: ["Parc du Biez", "Mondeville"], stat: "150" },
+  { to: "/event/2017-zsn", photo: "2017-2", ribbon: "24 Juin 2017", kicker: "Z Survival Night", title: "Edition 2017", locationLines: ["Vallée des Jardins", "Caen"], stat: "300" },
 ] as const;
 
 export function Home() {
@@ -55,24 +55,21 @@ export function Home() {
 
           <div className="hero__details">
             <div className="hero__date">{UPCOMING.dateLong}</div>
-            <p className="hero__sub">
-              Sept ans après la dernière contamination, l'AAES rouvre le périmètre. Dressez-vous
-              face à l'invasion&nbsp;: trois heures de jeu de rôle grandeur nature, en pleine nuit,
-              au Parc du Biez à Mondeville. Réussissez les missions, restez dans la lumière et percez
-              l'origine de l'infection… ou laissez-vous attraper et rejoignez la horde.
-            </p>
+            <p className="hero__sub">{UPCOMING.heroBlurb}</p>
             <div className="hero__cta">
               <Button variant="primary" to="/inscription">
-                S'inscrire · 15 €
+                S'inscrire · {UPCOMING.priceLabel}
               </Button>
               <Button variant="ghost" to="/regles">
                 Lire les règles
               </Button>
             </div>
             <div className="hero__meta">
-              <Badge variant="hazard">+3 heures</Badge>
-              <Badge variant="black">100 participants</Badge>
-              <Badge variant="outline">Parc du Biez · Mondeville</Badge>
+              <Badge variant="hazard">{UPCOMING.durationLabel}</Badge>
+              <Badge variant="black">{UPCOMING.participantsLabel}</Badge>
+              <Badge variant="outline">
+                {UPCOMING.location.venue} · {UPCOMING.location.city}
+              </Badge>
             </div>
           </div>
         </Container>
@@ -102,14 +99,8 @@ export function Home() {
               <SectionTitle>Le rendez-vous</SectionTitle>
             </div>
           </SectionHead>
-          <FactsStrip className="mb-[28px]">
-            <Fact k="Date" v="Sam. 12 sept." />
-            <Fact k="Heure" v="20h00" />
-            <Fact k="Durée" v="+3 heures" />
-            <Fact k="Âge" v="+16 ans" />
-            <Fact k="Tarif" v="15 €" tone="hazard" />
-          </FactsStrip>
-          <LocationBlock />
+          <UpcomingFacts className="mb-[28px]" />
+          <LocationBlock location={UPCOMING.location} />
         </Container>
       </Section>
 
@@ -129,27 +120,7 @@ export function Home() {
 
           <div className="events">
             {HOME_CARDS.map((c) => (
-              <Link key={c.t} className="ecard" to="/evenements">
-                <div className="ecard__media">
-                  <img src={photoUrl(c.photo)} alt="" loading="lazy" decoding="async" />
-                  <span className="ecard__ribbon">{c.ribbon}</span>
-                </div>
-                <div className="ecard__body">
-                  <div className="ecard__k">{c.k}</div>
-                  <h3 className="ecard__t">{c.t}</h3>
-                  <div className="ecard__row">
-                    <span className="ecard__loc">
-                      {c.loc[0]}
-                      <br />
-                      {c.loc[1]}
-                    </span>
-                    <span className="ecard__stat">
-                      {c.stat}
-                      <small>Participants</small>
-                    </span>
-                  </div>
-                </div>
-              </Link>
+              <EventCard key={c.title} {...c} />
             ))}
           </div>
         </Container>
@@ -169,7 +140,7 @@ export function Home() {
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
             <Button variant="cyan" to="/inscription">
-              S'inscrire · 15 €
+              S'inscrire · {UPCOMING.priceLabel}
             </Button>
             <Button variant="ghost" to="/regles">
               Lire les règles
