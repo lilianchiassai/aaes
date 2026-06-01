@@ -81,8 +81,7 @@
 .tl4__card:nth-child(even)::after { left: -42px; }
 .tl4__card:nth-child(even)::before { left: -51px; }
 .tl4__tab { position: relative; overflow: hidden; display: flex; align-items: center; gap: 11px; padding: 8px 14px; background: var(--hazard); color: #000; border-bottom: 2px solid #000; }
-.tl4__splat { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
-.tl4__splat i { position: absolute; display: block; border-radius: 50% 50% 48% 52% / 52% 48% 50% 50%; }
+.tl4__splat { position: absolute; inset: 0; z-index: 0; pointer-events: none; display: block; width: 100%; height: 100%; }
 .tl4__num { position: relative; z-index: 1; font-family: var(--font-display); font-size: 27px; line-height: .78; }
 .tl4__ttl { position: relative; z-index: 1; font-family: var(--font-impact); font-size: 23px; text-transform: uppercase; letter-spacing: .01em; line-height: 1; }
 .tl4__body { padding: 13px 16px 15px; }

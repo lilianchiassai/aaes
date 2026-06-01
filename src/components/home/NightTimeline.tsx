@@ -1,5 +1,9 @@
-import { useEffect, useLayoutEffect, useMemo, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import { STAGES, type TimelineStage } from "../../data/timeline";
+import splat02 from "../../assets/img/splatters/splat-02.svg";
+import splat03 from "../../assets/img/splatters/splat-03.svg";
+import splat04 from "../../assets/img/splatters/splat-04.svg";
+import splat05 from "../../assets/img/splatters/splat-05.svg";
 
 /* Human + zombie silhouettes (paths ported from index.html). */
 function HumanFig() {
@@ -23,80 +27,19 @@ function ZombieFig() {
   );
 }
 
-/* Deterministic PRNG (mulberry32-ish), ported from index.html so the splatter
-   is identical on every render — no Math.random(). */
-function rng(seed: number) {
-  return function () {
-    seed |= 0;
-    seed = (seed + 0x6d2b79f5) | 0;
-    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
-
-const CLUSTERS: Record<string, number> = { "01": 0, "02": 1, "03": 2, "04": 3, "05": 8 };
-const XMIN: Record<string, number> = { "02": 52, "04": 40 };
-
-interface Dot {
-  x: number;
-  y: number;
-  d: number;
-  sq: number;
-  rot: number;
-}
-
-function splatterDots(n: string): Dot[] {
-  const clusters = CLUSTERS[n] || 0;
-  if (!clusters) return [];
-  const r = rng(parseInt(n, 10) * 97 + 13);
-  const xMin = XMIN[n] || 7;
-  const xSpan = 93 - xMin;
-  const dots: Dot[] = [];
-  const dot = (x: number, y: number, d: number) => {
-    const sq = 0.72 + r() * 0.55;
-    const rot = Math.floor(r() * 360);
-    dots.push({ x, y, d, sq, rot });
-  };
-  for (let c = 0; c < clusters; c++) {
-    const cx = xMin + r() * xSpan;
-    const cy = 14 + r() * 72;
-    const core = 4.5 + r() * 6.5;
-    const spread = 13 + r() * 15;
-    const sat = 11 + Math.floor(r() * 16);
-    dot(cx, cy, core);
-    for (let s = 0; s < sat; s++) {
-      const ang = r() * Math.PI * 2;
-      const dist = Math.pow(r(), 0.6) * spread;
-      const dx = cx + Math.cos(ang) * dist;
-      const dy = cy + Math.sin(ang) * dist * 0.62;
-      const sz = 1 + r() * r() * 5;
-      dot(dx, dy, sz);
-    }
-  }
-  return dots;
-}
+/* Pre-rendered blood splatter per stage (generated once from the original
+   PRNG-driven dot field, then frozen as SVG). Stage 01 has none. */
+const SPLATTERS: Record<string, string> = {
+  "02": splat02,
+  "03": splat03,
+  "04": splat04,
+  "05": splat05,
+};
 
 function Splatter({ n }: { n: string }) {
-  const dots = useMemo(() => splatterDots(n), [n]);
-  if (!dots.length) return null;
-  return (
-    <div className="tl4__splat">
-      {dots.map((dt, i) => (
-        <i
-          key={i}
-          style={{
-            left: `${dt.x.toFixed(1)}%`,
-            top: `${dt.y.toFixed(1)}%`,
-            width: `${dt.d.toFixed(1)}px`,
-            height: `${(dt.d * dt.sq).toFixed(1)}px`,
-            background: "rgba(0,0,0,.32)",
-            transform: `translate(-50%,-50%) rotate(${dt.rot}deg)`,
-          }}
-        />
-      ))}
-    </div>
-  );
+  const src = SPLATTERS[n];
+  if (!src) return null;
+  return <img className="tl4__splat" src={src} alt="" aria-hidden="true" />;
 }
 
 function StageCard({ s }: { s: TimelineStage }) {
