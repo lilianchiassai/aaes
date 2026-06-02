@@ -46,9 +46,17 @@ export function Inscription() {
     const check = () => {
       if (el.scrollTop + el.clientHeight >= el.scrollHeight - 24) setRead(true);
     };
-    if (el.scrollHeight <= el.clientHeight + 24) setRead(true);
+    // Defer the initial fits-without-scrolling measurement to the next frame
+    // so the layout read happens after the browser's post-commit layout
+    // rather than synchronously inside the effect (avoids a forced reflow).
+    const raf = requestAnimationFrame(() => {
+      if (el.scrollHeight <= el.clientHeight + 24) setRead(true);
+    });
     el.addEventListener("scroll", check);
-    return () => el.removeEventListener("scroll", check);
+    return () => {
+      cancelAnimationFrame(raf);
+      el.removeEventListener("scroll", check);
+    };
   }, []);
 
   // HelloAsso posts its content height; grow the iframe to fit.

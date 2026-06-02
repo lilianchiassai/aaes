@@ -17,16 +17,31 @@ export function useScrollParallax() {
 
     if (!heroArt && !pbanner) return;
 
+    // Cache the banner's static layout (document offset + height) and the
+    // viewport height so the scroll loop never reads geometry — reading
+    // `getBoundingClientRect()` every frame forces a synchronous reflow.
+    // These only change on resize, so we re-measure there inside a rAF.
+    let vh = window.innerHeight;
+    let bannerCenter = 0; // banner centre as a document offset (px from top)
+    const measure = () => {
+      vh = window.innerHeight;
+      if (pbanner) {
+        const r = pbanner.getBoundingClientRect();
+        const top = r.top + (window.scrollY || window.pageYOffset);
+        bannerCenter = top + r.height / 2;
+      }
+    };
+
     let ticking = false;
     const onScroll = () => {
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(() => {
         const y = window.scrollY || window.pageYOffset;
-        const vh = window.innerHeight;
         if (pbanner && layers.length) {
-          const r = pbanner.getBoundingClientRect();
-          const progress = vh / 2 - (r.top + r.height / 2);
+          // Banner centre relative to viewport centre, derived from cached
+          // offsets — no layout read. (bannerCenter - y) === r.top + r.height/2.
+          const progress = vh / 2 - (bannerCenter - y);
           for (const l of layers) {
             l.el.style.transform = `translateX(${progress * l.factor}px)`;
           }
@@ -46,12 +61,21 @@ export function useScrollParallax() {
       });
     };
 
+    const onResize = () => {
+      measure();
+      onScroll();
+    };
+
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll, { passive: true });
-    onScroll();
+    window.addEventListener("resize", onResize, { passive: true });
+    // Defer the first measure+paint to the next frame so the geometry read
+    // happens after the browser's post-commit layout, not synchronously
+    // inside the effect (which would force a reflow on the load path).
+    const raf = requestAnimationFrame(onResize);
     return () => {
+      cancelAnimationFrame(raf);
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
+      window.removeEventListener("resize", onResize);
     };
   }, []);
 }
