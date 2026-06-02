@@ -26,7 +26,7 @@ export function About() {
   return (
     <>
       <PageHead title="A propos" screenLabel="À propos — En-tête" image={assetUrl("hand-sil-yellow.png")}>
-        L'AAES — l'Amicale des Amateurs d'Excursions Scénarisées. Une bande de copains, une
+        L'AAES — l'Amicale des Amateurs d'Excursions Scénarisées. Des amis, une
         invasion zombie, et l'envie de remettre ça.
       </PageHead>
 
@@ -55,7 +55,7 @@ export function About() {
           </AboutBlock>
 
           <AboutBlock title="Notre philosophie">
-            <p>Deux règles simples, et on n'en démord pas&nbsp;:</p>
+            <p>Des evenements&nbsp;:</p>
             <ul className="list-none m-0 p-0 flex flex-col gap-3">
               <li className="relative bg-[#0d0d0d] border border-hairline border-l-[3px] border-l-hazard pl-[46px] pr-[18px] py-[14px] before:content-['☞'] before:absolute before:left-4 before:top-[13px] before:text-hazard before:text-2xl before:leading-[1.5]">
                 <Red>Accessible</Red> — un tarif qui reste à la portée de tout le monde.
