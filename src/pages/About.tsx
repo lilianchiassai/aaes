@@ -25,7 +25,7 @@ function AboutBlock({ title, children }: { title: ReactNode; children: ReactNode
 export function About() {
   return (
     <>
-      <PageHead title="À propos" screenLabel="À propos — En-tête" image={assetUrl("hand-sil-yellow.png")}>
+      <PageHead title="A propos" screenLabel="À propos — En-tête" image={assetUrl("hand-sil-yellow.png")}>
         L'AAES — l'Amicale des Amateurs d'Excursions Scénarisées. Une bande de copains, une
         invasion zombie, et l'envie de remettre ça.
       </PageHead>
@@ -46,7 +46,7 @@ export function About() {
             </p>
           </AboutBlock>
 
-          <AboutBlock title="Comment ça a grandi">
+          <AboutBlock title="Comment ca a grandi">
             <p>
               Les scénarios sont devenus de plus en plus <Red>fous</Red>, les nuits de plus en plus
               longues, les missions de plus en plus tordues. On est passés d'une soirée à{" "}
@@ -75,7 +75,7 @@ export function About() {
             </p>
           </AboutBlock>
 
-          <AboutBlock title="Pourquoi on s'était arrêtés">
+          <AboutBlock title="Pourquoi on s'etait arretes">
             <p>
               Le Covid, d'abord, qui a tout mis en pause. Puis la <Red>vie</Red> — les boulots, les
               déménagements, les agendas qui ne collent plus. On a rangé le maquillage et les

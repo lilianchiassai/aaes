@@ -127,7 +127,7 @@ export const ZEVENTS: ZEvent[] = [
   },
   {
     id: "2016-soiree-zombie",
-    name: "Soirée Zombie",
+    name: "Soiree Zombie",
     kicker: "Édition 2016",
     dateShort: "25 juin 2016",
     dateLong: "Samedi 25 juin 2016",
@@ -142,7 +142,7 @@ export const ZEVENTS: ZEvent[] = [
   },
   {
     id: "2015-soiree-zombie",
-    name: "Soirée Zombie",
+    name: "Soiree Zombie",
     kicker: "Édition 2015",
     dateShort: "27 juin 2015",
     dateLong: "Samedi 27 juin 2015",
@@ -157,7 +157,7 @@ export const ZEVENTS: ZEvent[] = [
   },
   {
     id: "2014-soiree-zombie",
-    name: "Soirée Zombie",
+    name: "Soiree Zombie",
     kicker: "Édition 2014",
     dateShort: "28 juin 2014",
     dateLong: "Samedi 28 juin 2014",
@@ -172,7 +172,7 @@ export const ZEVENTS: ZEvent[] = [
   },
   {
     id: "2013-soiree-zombie",
-    name: "Soirée Zombie",
+    name: "Soiree Zombie",
     kicker: "Édition 2013",
     dateShort: "17 août 2013",
     dateLong: "Samedi 17 août 2013",
@@ -186,7 +186,7 @@ export const ZEVENTS: ZEvent[] = [
   },
   {
     id: "2012-soiree-zombie",
-    name: "Soirée Zombie",
+    name: "Soiree Zombie",
     kicker: "Édition 2012",
     dateShort: "2012",
     dateLong: "2012",
@@ -200,7 +200,7 @@ export const ZEVENTS: ZEvent[] = [
   },
   {
     id: "2011-soiree-zombie",
-    name: "Soirée Zombie",
+    name: "Soiree Zombie",
     kicker: "Édition 2011",
     dateShort: "2011",
     dateLong: "2011",
