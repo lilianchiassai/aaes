@@ -50,7 +50,7 @@ export function Home() {
       <section className="relative overflow-hidden bg-black z-[1]" data-screen-label="Accueil — Hero">
         <img
           data-parallax-hero
-          className="absolute right-[-2%] top-1/2 -translate-y-1/2 h-[95%] z-[1] opacity-90 pointer-events-none mix-blend-screen will-change-transform [filter:grayscale(1)_contrast(1.25)_brightness(.9)] [-webkit-mask-image:linear-gradient(90deg,transparent_0%,rgba(0,0,0,.35)_22%,#000_48%)] [mask-image:linear-gradient(90deg,transparent_0%,rgba(0,0,0,.35)_22%,#000_48%)]"
+          className="absolute right-[-2%] top-1/2 -translate-y-1/2 h-[95%] z-[1] opacity-90 max-[760px]:opacity-20 pointer-events-none mix-blend-screen will-change-transform [filter:grayscale(1)_contrast(1.25)_brightness(.9)] [-webkit-mask-image:linear-gradient(90deg,transparent_0%,rgba(0,0,0,.35)_22%,#000_48%)] [mask-image:linear-gradient(90deg,transparent_0%,rgba(0,0,0,.35)_22%,#000_48%)]"
           src={assetUrl("zombie-hand-recto.png")}
           alt=""
         />

@@ -69,6 +69,9 @@ export function Header() {
           <NavLink to="/regles" className={navClass} onClick={close}>
             Règles
           </NavLink>
+          <NavLink to="/a-propos" className={navClass} onClick={close}>
+            À propos
+          </NavLink>
           <NavLink to="/inscription" className={ctaClass} onClick={close}>
             S'inscrire
           </NavLink>

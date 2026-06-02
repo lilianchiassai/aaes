@@ -44,6 +44,9 @@ export function Footer({ extraLegal }: { extraLegal?: string }) {
 
           <div>
             <h4 className={colHead}>L'association</h4>
+            <Link to="/a-propos" className={colLink}>
+              À propos
+            </Link>
             <Link to="/evenements" className={colLink}>
               Nos événements
             </Link>

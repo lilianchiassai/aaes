@@ -17,7 +17,7 @@ function HumanFig() {
 }
 function ZombieFig() {
   return (
-    <svg className="block h-[26px] w-auto fill-cyan [filter:drop-shadow(1.5px_2px_0_rgba(0,0,0,.55))]" viewBox="0 0 96 120">
+    <svg className="block h-[26px] w-auto fill-cyan [filter:drop-shadow(-2px_2.5px_0_var(--color-blood))]" viewBox="0 0 96 120">
       <path d="M30 80 L16 116 L26 116 L41 86 Z" />
       <path d="M40 84 L50 116 L60 116 L51 88 Z" />
       <path d="M27 34 C19 46 22 64 36 82 C43 90 52 88 49 79 C42 64 41 50 46 40 C50 31 31 27 27 34 Z" />

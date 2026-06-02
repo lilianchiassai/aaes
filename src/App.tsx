@@ -5,6 +5,7 @@ import { Events } from "./pages/Events";
 import { EventDetail } from "./pages/EventDetail";
 import { Rules } from "./pages/Rules";
 import { Inscription } from "./pages/Inscription";
+import { About } from "./pages/About";
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
           <Route path="event/:id" element={<EventDetail />} />
           <Route path="regles" element={<Rules />} />
           <Route path="inscription" element={<Inscription />} />
+          <Route path="a-propos" element={<About />} />
         </Route>
       </Routes>
     </HashRouter>
