@@ -156,7 +156,7 @@ export function EventDetail() {
                     <FilmImg
                       src={photoUrl(p)}
                       alt=""
-                      className="contrast-[1.15] transition-[transform,filter] duration-300 group-hover:scale-[1.06] group-hover:grayscale-[0.3] group-hover:contrast-[1.25]"
+                      className="grayscale-[0.65] opacity-90 contrast-[1.15] transition-[transform,filter,opacity] duration-300 group-hover:scale-[1.06] group-hover:grayscale-0 group-hover:opacity-100 group-hover:contrast-[1.25]"
                     />
                   </button>
                 ))}

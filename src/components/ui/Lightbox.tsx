@@ -34,7 +34,7 @@ export function Lightbox({ src, onClose }: { src: string | null; onClose: () => 
           fit="none"
           src={src}
           alt=""
-          className="max-w-[92vw] max-h-[88vh] border-[3px] border-hazard shadow-[0_0_50px_rgba(0,0,0,0.8)] contrast-[1.15]"
+          className="max-w-[92vw] max-h-[88vh] border-[3px] border-hazard shadow-[0_0_50px_rgba(0,0,0,0.8)] grayscale-0 contrast-100"
         />
       )}
     </div>
