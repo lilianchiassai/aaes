@@ -26,6 +26,10 @@ export function LocationBlock({
         <h3 className="font-display text-[clamp(30px,4vw,46px)] uppercase text-white leading-[0.9] mt-1.5 mb-3">
           {location.venue}
         </h3>
+        <address className="not-italic font-cond text-lg text-grey-100 mb-3 leading-snug">
+          {location.street}
+          {location.postalCode ? `, ${location.postalCode}` : ""} {location.city}
+        </address>
         <Lead className="mb-5">{location.addressNote}</Lead>
         <Button variant="ghost" href={location.mapsUrl} target="_blank" rel="noopener">
           Ouvrir dans Google Maps ↗

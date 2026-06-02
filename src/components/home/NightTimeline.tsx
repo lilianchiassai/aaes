@@ -1,5 +1,6 @@
-import { useEffect, useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useMemo, useRef } from "react";
 import { STAGES, type TimelineStage } from "../../data/timeline";
+import { TimelineQuote, pickTimelineQuote } from "./TimelineQuote";
 import splat02 from "../../assets/img/splatters/splat-02.svg";
 import splat03 from "../../assets/img/splatters/splat-03.svg";
 import splat04 from "../../assets/img/splatters/splat-04.svg";
@@ -103,12 +104,17 @@ function StageCard({ s }: { s: TimelineStage }) {
           {s.bullets.map((b, i) => (
             <li
               key={i}
-              className="font-body font-light text-[19px] text-grey-100 leading-[1.4] pl-[15px] relative before:content-[''] before:absolute before:left-0 before:top-[7px] before:w-[6px] before:h-[6px] before:bg-[var(--dot,var(--color-hazard))] before:rotate-45"
+              className="font-body font-light text-2xl text-grey-100 leading-[1.4] pl-[18px] relative before:content-[''] before:absolute before:left-0 before:top-[10px] before:w-[7px] before:h-[7px] before:bg-[var(--dot,var(--color-hazard))] before:rotate-45"
             >
               {b}
             </li>
           ))}
         </ul>
+        {s.closer && (
+          <p className="mt-4 text-center font-display uppercase text-[clamp(22px,2.2vw,30px)] leading-none text-hazard">
+            {s.closer}
+          </p>
+        )}
       </div>
     </div>
   );
@@ -117,8 +123,11 @@ function StageCard({ s }: { s: TimelineStage }) {
 export function NightTimeline() {
   const rowsRef = useRef<HTMLDivElement>(null);
   const spineRef = useRef<HTMLDivElement>(null);
+  const quote = useMemo(() => pickTimelineQuote(), []);
 
-  // Fit the gradient spine to the last (overlapping) card, like fitSpine().
+  // Fit the gradient spine to the last (overlapping) card's connector, like
+  // fitSpine(). Re-fits on resize, on font load, and — crucially — whenever the
+  // cards' own size changes (e.g. text wraps differently), via a ResizeObserver.
   useLayoutEffect(() => {
     const fit = () => {
       const rows = rowsRef.current;
@@ -134,13 +143,14 @@ export function NightTimeline() {
     fit();
     window.addEventListener("resize", fit);
     if (document.fonts?.ready) document.fonts.ready.then(fit).catch(() => {});
-    return () => window.removeEventListener("resize", fit);
-  }, []);
 
-  // Re-fit once more after first paint (fonts/layout settle).
-  useEffect(() => {
-    const id = setTimeout(() => window.dispatchEvent(new Event("resize")), 60);
-    return () => clearTimeout(id);
+    const ro = new ResizeObserver(fit);
+    if (rowsRef.current) ro.observe(rowsRef.current);
+
+    return () => {
+      window.removeEventListener("resize", fit);
+      ro.disconnect();
+    };
   }, []);
 
   return (
@@ -153,6 +163,10 @@ export function NightTimeline() {
         {STAGES.map((s) => (
           <StageCard key={s.n} s={s} />
         ))}
+        <TimelineQuote
+          q={quote}
+          className="zmd:self-end zmd:w-fit zmd:max-w-[45%] zmd:mt-[-150px] zmd:mb-8 zmd:mr-[-24px] zmd:pt-[60px] max-zmd:mt-12 max-zmd:ml-12"
+        />
       </div>
     </div>
   );

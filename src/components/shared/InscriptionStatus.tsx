@@ -65,7 +65,7 @@ export function InscriptionStatus({
           Inscriptions pas encore ouvertes
         </h2>
 
-        <p className="font-body text-xl text-grey-100 max-w-[60ch] mt-6 leading-[1.5]">
+        <p className="font-body text-2xl text-grey-100 max-w-[60ch] mt-6 leading-[1.5]">
           La billetterie de l'édition 2026 n'est pas encore en ligne — tout est sous contrôle.
           Programmez un rappel ou partagez l'événement pour ne pas rater l'ouverture : les places
           sont limitées et partent vite.
@@ -81,7 +81,7 @@ export function InscriptionStatus({
         </div>
 
         <Kicker tone="muted" size="xs" tracking="wide" className="block mt-9 mb-4">
-          Restez dans la lumière
+          Restez informé
         </Kicker>
         <div className="flex flex-wrap gap-[14px]">
           <a

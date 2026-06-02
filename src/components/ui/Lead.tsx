@@ -5,7 +5,7 @@ import type { ReactNode } from "react";
    `className` is tailwind-merged, so `text-lg`, `mx-auto`, margins, etc.
    override the base cleanly. */
 const lead = tv({
-  base: "font-body text-lg text-grey-100 leading-[1.6] max-w-[80ch]",
+  base: "font-body text-2xl text-grey-100 leading-[1.6] max-w-[80ch]",
 });
 
 export function Lead({

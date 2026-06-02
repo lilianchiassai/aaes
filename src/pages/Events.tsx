@@ -45,9 +45,14 @@ export function Events() {
                   <br />
                   2026
                 </div>
-                <p className="font-body text-lg text-grey-100 leading-[1.6] max-w-[54ch]">
-                  {UPCOMING.featuredBlurb}
-                </p>
+                {UPCOMING.heroBlurb.map((para, i) => (
+                  <p
+                    key={i}
+                    className="font-body text-2xl text-grey-100 leading-[1.6] max-w-[72ch]"
+                  >
+                    {para}
+                  </p>
+                ))}
                 <div className="mt-5 flex gap-[14px] flex-wrap">
                   <Button variant="primary" to="/inscription">
                     S'inscrire · 15 €
@@ -58,6 +63,7 @@ export function Events() {
                 </div>
               </div>
               <div className="bg-black border-l-4 border-cyan px-7 py-6 flex flex-col justify-center gap-[14px]">
+                <Recap n={UPCOMING.time} l="Début" />
                 <Recap n="15 €" l="L'inscription" />
                 <Recap n="+16" l="Âge minimum" />
                 <Recap n="+3h" l="De jeu, en pleine nuit" />

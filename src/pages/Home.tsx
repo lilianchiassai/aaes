@@ -26,6 +26,24 @@ export function Home() {
   useScrollParallax();
   const open = inscriptionIsOpen();
 
+  const description = (
+    <>
+      <p>
+        Une Soirée Zombie, c'est un jeu de rôle grandeur nature. Le temps d'une nuit, vous et vos
+        amis incarnez un survivant en pleine invasion zombie. Quelle est l'origine de la
+        contamination&nbsp;? Existe-t-il un remède&nbsp;? Comment prendre la fuite&nbsp;? Pour
+        répondre à ces questions — et survivre jusqu'au petit matin —, vous devrez accomplir des
+        missions et suivre un scénario original créé par nos soins. Mais alors que les humains se
+        font contaminer un à un, la horde se renforce et le danger grandit.
+      </p>
+      <p>
+        Si un zombie vous touche, c'est fini pour vous… à moins que ce ne soit que le début&nbsp;?
+        Fraîchement maquillé, vous passez de l'autre côté&nbsp;: zombie à votre tour, prêt à faire
+        peur à vos anciens compagnons.
+      </p>
+    </>
+  );
+
   return (
     <>
       {/* ============ HERO ============ */}
@@ -77,9 +95,14 @@ export function Home() {
             <div className="font-impact text-[clamp(28px,3.8vw,52px)] text-hazard uppercase tracking-[0.01em] leading-none mt-2 mb-[6px]">
               {UPCOMING.dateLong}
             </div>
-            <p className="font-body text-xl text-grey-100 max-w-[64ch] mt-5 mb-4 leading-[1.5]">
-              {UPCOMING.heroBlurb}
-            </p>
+            {UPCOMING.heroBlurb.map((para, i) => (
+              <p
+                key={i}
+                className="font-body text-2xl text-grey-100 max-w-[64ch] mt-5 mb-4 leading-[1.5]"
+              >
+                {para}
+              </p>
+            ))}
             <div className="flex gap-4 flex-wrap items-center mt-[14px]">
               {open ? (
                 <Button variant="primary" to="/inscription">
@@ -107,17 +130,23 @@ export function Home() {
 
       <ParallaxBanner />
 
-      {/* ============ COMMENT ÇA SE PASSE ============ */}
-      <Section ground="concrete" tightTop data-screen-label="Accueil — Déroulement">
+      {/* ============ À QUOI S'ATTENDRE ============ */}
+      <Section ground="concrete" tightTop data-screen-label="Accueil — À quoi s'attendre">
         <Container>
           <SectionHead>
             <div>
               <SectionTitle>
-                Comment se déroule <em>la nuit</em>
+                À quoi <em>s'attendre</em>
               </SectionTitle>
             </div>
           </SectionHead>
-          <NightTimeline />
+          <div className="font-body text-2xl text-white leading-snug space-y-4">
+            {description}
+          </div>
+
+          <div className="mt-14">
+            <NightTimeline />
+          </div>
         </Container>
       </Section>
 

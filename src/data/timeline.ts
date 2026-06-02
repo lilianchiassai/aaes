@@ -14,6 +14,8 @@ export interface TimelineStage {
   /** Number of zombie figures to render in the crowd. */
   zombie: number;
   bullets: string[];
+  /** Optional dramatic closing line (no bullet, centered, larger). */
+  closer?: string;
   /** Gauge / tab colour for this stage. */
   color: string;
 }
@@ -26,9 +28,9 @@ export const STAGES: TimelineStage[] = [
     zombie: 0,
     color: "#f5e000",
     bullets: [
-      "On vous remet votre bracelet lumineux",
-      "Vérification de votre inscription",
-      "Remise de votre panier-repas",
+      "On vérifie votre inscription",
+      "On vous remet votre panier-repas",
+      "Votre bracelet lumineux : la preuve que vous êtes humain",
     ],
   },
   {
@@ -45,15 +47,14 @@ export const STAGES: TimelineStage[] = [
   },
   {
     n: "03",
-    title: "Les missions",
+    title: "Le scénario",
     human: 6,
     zombie: 4,
     color: "#3fc6a6",
     bullets: [
-      "Percez l'origine de l'épidémie",
-      "Trouvez un remède",
-      "Trouvez comment vous échapper",
-      "Protégez vos camps : marquages fluo, interdits aux zombies",
+      "Vous rejoignez une équipe, avec son camp interdit aux zombies",
+      "Chaque équipe a ses propres missions et un scénario à découvrir au fil de la nuit",
+      "Plusieurs façons de l'emporter : concocter un remède, sauver les siens, s'échapper ou tenir jusqu'au bout…",
     ],
   },
   {
@@ -63,22 +64,22 @@ export const STAGES: TimelineStage[] = [
     zombie: 7,
     color: "#0e7790",
     bullets: [
-      "Vous changez de camp",
-      "Direction le camp zombie pour être maquillé",
+      "Touché par un zombie ? Vous changez de camp et retirez votre bracelet lumineux",
+      "Direction le camp zombie pour vous faire maquiller",
       "Vous traquez à votre tour vos anciens amis",
     ],
   },
   {
     n: "05",
-    title: "La survie",
+    title: "La fin",
     human: 1,
     zombie: 9,
     color: "#1fa6cf",
     bullets: [
-      "La partie s'achève quand les humains trouvent un remède…",
+      "La partie s'achève quand les survivants trouvent un remède…",
       "… une échappatoire …",
-      "… ou qu'ils sont tous tombés",
-      "Bonne chance.",
+      "… ou qu'ils sont tous morts",
     ],
+    closer: "Bonne chance",
   },
 ];

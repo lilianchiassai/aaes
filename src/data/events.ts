@@ -118,7 +118,7 @@ export const ZEVENTS: ZEvent[] = [
     dateLong: "Samedi 24 juin 2017",
     loc: "Vallée des Jardins, Caen",
     participants: "300",
-    survivors: "1",
+    survivors: "24",
     fact: "300 joueurs — le plus grand rassemblement jamais lâché dans la nuit par l'AAES.",
     trailer: "x_KsK1fEIZ0",
     blurb:

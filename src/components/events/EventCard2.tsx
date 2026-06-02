@@ -37,7 +37,9 @@ export function EventCard2({ ev, preview = false }: { ev: ZEvent; preview?: bool
     .split(",")
     .map((s) => s.trim())
     .join(" · ");
-  const thumbs = ev.photos.slice(1, 4);
+  // With a trailer the hero is the video, so the strip leads with photo 1
+  // (photos 1–3); without one the hero is photo 1, so the strip follows with 2–4.
+  const thumbs = ev.trailer ? ev.photos.slice(0, 3) : ev.photos.slice(1, 4);
 
   const body = (
     <>

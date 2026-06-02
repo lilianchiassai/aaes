@@ -35,10 +35,7 @@ export function Footer({ extraLegal }: { extraLegal?: string }) {
               L'édition 2026
             </Link>
             <Link to="/regles" className={colLink}>
-              Règles & infos
-            </Link>
-            <Link to="/evenements" className={colLink}>
-              Éditions passées
+              Règles
             </Link>
             <Link to="/inscription" className={colLink}>
               S'inscrire

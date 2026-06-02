@@ -23,7 +23,7 @@ function RuleBlock({ title, children }: { title: ReactNode; children: ReactNode 
 /** Rule line: chevron-bulleted card with a hazard left border. */
 function RuleItem({ children }: { children: ReactNode }) {
   return (
-    <li className="relative font-body text-lg text-grey-100 leading-[1.55] bg-[#0d0d0d] border border-hairline border-l-[3px] border-l-hazard pl-[46px] pr-[18px] py-[14px] before:content-['☞'] before:absolute before:left-4 before:top-[13px] before:text-hazard before:text-lg before:leading-[1.5]">
+    <li className="relative font-body text-2xl text-grey-100 leading-[1.55] bg-[#0d0d0d] border border-hairline border-l-[3px] border-l-hazard pl-[46px] pr-[18px] py-[14px] before:content-['☞'] before:absolute before:left-4 before:top-[13px] before:text-hazard before:text-2xl before:leading-[1.5]">
       {children}
     </li>
   );
@@ -59,6 +59,13 @@ export function Rules() {
           <RuleBlock title="Deroulement">
             <RuleItem>Arrivez 15 minutes avant l'heure de début prévue.</RuleItem>
             <RuleItem>
+              À votre arrivée, un <Red>panier repas</Red> vous est remis pour ne pas avoir faim
+              pendant la partie.
+            </RuleItem>
+            <RuleItem>
+              Vous recevez également un <Red>bracelet lumineux</Red>.
+            </RuleItem>
+            <RuleItem>
               Dès que la soirée est commencée, si un humain se fait attraper par un zombie, il est
               emmené au camp des zombies pour être <Red>maquillé</Red> et devenir à son tour un
               zombie.
@@ -84,6 +91,10 @@ export function Rules() {
             <RuleItem>
               Si tenter de survivre s'avère trop stressant, les humains peuvent se laisser attraper.
             </RuleItem>
+            <RuleItem>
+              Si un humain est touché par un zombie, il <Red>devient zombie</Red>. Le zombie
+              l'accompagne, <Red>hors-jeu</Red>, jusqu'au camp zombie.
+            </RuleItem>
           </RuleBlock>
 
           <RuleBlock title="Zombies">
@@ -95,6 +106,9 @@ export function Rules() {
               Les zombies <Red>marchent</Red> et ne courent pas.
             </RuleItem>
             <RuleItem>Les zombies n'utilisent pas de lampe.</RuleItem>
+            <RuleItem>
+              Les zombies ne <Red>parlent</Red> pas, ils grognent.
+            </RuleItem>
             <RuleItem>
               Les camps protégés, signalés par des marquages fluorescents, sont interdits aux
               zombies.
@@ -112,6 +126,19 @@ export function Rules() {
             </RuleItem>
           </RuleBlock>
 
+          <RuleBlock title="Securite">
+            <RuleItem>
+              Une <Red>infirmerie</Red> est installée au camp zombie.
+            </RuleItem>
+            <RuleItem>
+              Des <Red>contacts importants</Red> vous sont fournis lors de l'inscription.
+            </RuleItem>
+            <RuleItem>
+              Des organisateurs sont <Red>dédiés à la sécurité</Red> tout au long de la soirée.
+            </RuleItem>
+            <RuleItem>Les armes sont interdites.</RuleItem>
+          </RuleBlock>
+
           <RuleBlock title="Regles importantes">
             <RuleItem>
               L'<Red>équipe d'organisation</Red> ne souhaite qu'une chose&nbsp;: vous faire passer
@@ -119,12 +146,15 @@ export function Rules() {
               peut changer les règles de la soirée à tout moment.
             </RuleItem>
             <RuleItem>
+              L'équipe d'organisation peut <Red>exclure un joueur</Red> à tout moment en cas de
+              non-respect des règles.
+            </RuleItem>
+            <RuleItem>
               Pour que chacun s'amuse, n'oubliez pas de rester <Red>fair play</Red> et de bonne
               humeur&nbsp;!
             </RuleItem>
-            <RuleItem>
-              Bien évidemment, armes, alcool et substances illicites sont interdits.
-            </RuleItem>
+            <RuleItem>Alcool et substances illicites sont interdits.</RuleItem>
+            <RuleItem>Les musiques sonorisées sont interdites.</RuleItem>
           </RuleBlock>
 
           <div className="bg-hazard text-black px-[26px] py-[22px] border-2 border-black shadow-hard font-cond font-semibold uppercase tracking-[0.04em] text-lg leading-[1.4]">

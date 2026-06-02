@@ -97,7 +97,10 @@ body {
   font-family: var(--font-body);
   font-weight: 300;
   -webkit-font-smoothing: antialiased;
-  background: #3a3a3a url("./assets/img/concrete-texture.png") center / cover fixed;
+  background:
+    linear-gradient(rgba(13, 13, 13, 0.55), rgba(13, 13, 13, 0.55)),
+    url("./assets/img/concrete-texture.jpg") center / cover fixed;
+  background-color: #0d0d0d;
 }
 img {
   display: block;

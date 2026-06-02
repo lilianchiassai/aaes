@@ -8,6 +8,8 @@
 export interface EventLocation {
   /** Venue name, e.g. "Parc du Biez". */
   venue: string;
+  /** Street line, e.g. "6 Rue Calmette". */
+  street: string;
   city: string;
   postalCode?: string;
   /** Paragraph shown under the venue name (directions, parking, etc.). */
@@ -35,16 +37,16 @@ export interface UpcomingEdition {
   inscriptionOpenAt: string;
   /** Human label for the opening date, e.g. "1er juillet 2026". */
   inscriptionOpenLabel: string;
-  heroBlurb: string;
-  featuredBlurb: string;
+  heroBlurb: string[];
 }
 
 const PARC_DU_BIEZ: EventLocation = {
   venue: "Parc du Biez",
+  street: "6 Rue Calmette",
   city: "Mondeville",
   postalCode: "14120",
   addressNote:
-    "Mondeville (14120). Rendez-vous à l'entrée du parc dès 19h45. Stationnement à proximité — venez équipés pour la boue et la nuit.",
+    "Rendez-vous à l'entrée du parc dès 19h45. Stationnement à proximité.",
   mapsUrl: "https://maps.app.goo.gl/GLzU4qhYdh8LCHRG8",
   mapsEmbedUrl: "https://www.google.com/maps?q=Parc+du+Biez,+Mondeville+14120&output=embed",
 };
@@ -63,10 +65,10 @@ export const UPCOMING: UpcomingEdition = {
   priceLabel: "15 €",
   inscriptionOpenAt: "2026-07-01T10:00:00",
   inscriptionOpenLabel: "1er juillet 2026",
-  heroBlurb:
-    "Sept ans après la dernière contamination, l'AAES rouvre le périmètre. Dressez-vous face à l'invasion : trois heures de jeu de rôle grandeur nature, en pleine nuit, au Parc du Biez à Mondeville. Réussissez les missions, restez dans la lumière et percez l'origine de l'infection… ou laissez-vous attraper et rejoignez la horde.",
-  featuredBlurb:
-    "Après 7 ans, l'infection regagne le Parc du Biez à Mondeville. Trois heures de jeu de rôle grandeur nature en pleine nuit : survivez aux missions ou rejoignez la horde. Places limitées — l'inscription est ouverte.",
+  heroBlurb: [
+    "Les morts sont revenus à la vie, et ils ont faim. Sept ans après notre dernière Soirée Zombie, l'AAES reprend du service : le temps d'une nuit, rejoignez un groupe de rescapés livré à lui-même. Plus de trois heures d'action, d'angoisse et d'adrénaline au Parc du Biez à Mondeville. Si vous êtes mordus, devenez zombie.",
+    "Votre objectif : survivre.",
+  ],
 };
 
 /** Is registration open right now? (Compared against `inscriptionOpenAt`.) */
