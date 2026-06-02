@@ -22,7 +22,7 @@ export function photoUrl(name: string): string {
   return `${PHOTO_CDN}/${name}.jpg`;
 }
 
-/** Full URL for a static asset in public/assets, e.g. assetUrl("logo-aaes.png") */
+/** Full URL for a static asset in public/assets, e.g. assetUrl("logo-aaes.webp") */
 export function assetUrl(file: string): string {
   return `${BASE}assets/${file}`;
 }

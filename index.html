@@ -2,11 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/webp" href="/assets/logo-aaes.webp" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preload" as="font" type="font/ttf" href="/aaes/fonts/28_Days_Later.ttf" crossorigin />
-    <link rel="preload" as="font" type="font/otf" href="/aaes/fonts/AkzidenzGrotesk-LightCond.otf" crossorigin />
-    <link rel="preload" as="font" type="font/ttf" href="/aaes/fonts/big_noodle_titling.ttf" crossorigin />
+    <!-- LCP hero art: make it discoverable before the JS bundle parses -->
+    <link rel="preload" as="image" href="/assets/zombie-hand-recto.webp" fetchpriority="high" />
+    <link rel="preload" as="font" type="font/ttf" href="/fonts/28_Days_Later.ttf" crossorigin />
+    <link rel="preload" as="font" type="font/otf" href="/fonts/AkzidenzGrotesk-LightCond.otf" crossorigin />
+    <link rel="preload" as="font" type="font/ttf" href="/fonts/big_noodle_titling.ttf" crossorigin />
     <title>Z Survival Night — AAES · 12 septembre 2026</title>
   </head>
   <body>

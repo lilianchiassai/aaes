@@ -101,7 +101,9 @@ body {
 }
 /* Concrete texture painted on a viewport-sized fixed layer, so `cover` always
    covers the viewport (~1:1 with the 1888px source) instead of being stretched
-   over the full document height — which is what made it pixelated on mobile. */
+   over the full document height — which is what made it pixelated on mobile.
+   Source is a 1500px WebP behind a 55% dark overlay, so heavy compression is
+   invisible. */
 body::before {
   content: "";
   position: fixed;
@@ -110,7 +112,7 @@ body::before {
   pointer-events: none;
   background:
     linear-gradient(rgba(13, 13, 13, 0.55), rgba(13, 13, 13, 0.55)),
-    url("./assets/img/concrete-texture.jpg") center / cover;
+    url("./assets/img/concrete-texture.webp") center / cover;
 }
 img {
   display: block;

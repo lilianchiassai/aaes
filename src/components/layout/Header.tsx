@@ -34,8 +34,10 @@ export function Header() {
       <Container className="flex items-center gap-[22px] h-[74px]">
         <Link to="/" className="flex items-center gap-[18px] no-underline" onClick={close}>
           <img
-            src={assetUrl("logo-aaes.png")}
+            src={assetUrl("logo-aaes.webp")}
             alt="AAES"
+            width={46}
+            height={46}
             className="w-[46px] h-[46px] [filter:drop-shadow(2px_2px_0_#000)]"
           />
           <b className="font-display text-2xl text-white uppercase tracking-[0.02em] leading-none">
