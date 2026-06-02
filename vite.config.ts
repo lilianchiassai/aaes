@@ -32,7 +32,7 @@ function inlineCss(): Plugin {
 
 // https://vite.dev/config/
 export default defineConfig({
-  // Repo is served at https://lilianchiassai.github.io/aaes/
-  base: '/aaes/',
+  // Served at the apex custom domain https://asso-aaes.fr/ (root).
+  base: '/',
   plugins: [react(), tailwindcss(), inlineCss()],
 })

@@ -1,9 +1,10 @@
 /**
  * Base-aware URL helpers for assets that live in `public/`.
  *
- * The site is served from `/aaes/` on GitHub Pages, so every runtime-resolved
- * public asset must be prefixed with `import.meta.env.BASE_URL` (which is
- * `/aaes/` in prod, `/` in dev). Assets imported through the bundler
+ * Every runtime-resolved public asset is prefixed with `import.meta.env.BASE_URL`
+ * (currently `/` — the site is served at the apex custom domain root). Keeping the
+ * helper means re-homing under a sub-path later is just a `base` change.
+ * Assets imported through the bundler
  * (fonts, CSS backgrounds in src/assets) are handled by Vite and don't use this.
  */
 const BASE = import.meta.env.BASE_URL;
