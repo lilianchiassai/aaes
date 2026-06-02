@@ -28,6 +28,7 @@ export const STAGES: TimelineStage[] = [
     zombie: 0,
     color: "#f5e000",
     bullets: [
+      "Vous venez préparé à crapahuter dans les bois",
       "On vérifie votre inscription",
       "On vous remet votre panier-repas",
       "Votre bracelet lumineux : la preuve que vous êtes humain",

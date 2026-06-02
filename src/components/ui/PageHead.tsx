@@ -24,6 +24,8 @@ export function PageHead({
     >
       {image && (
         <img
+          loading="lazy"
+          decoding="async"
           src={image}
           alt={imageAlt}
           className="absolute right-[-2%] bottom-[-10%] w-[360px] max-w-[36vw] opacity-[0.16] pointer-events-none"

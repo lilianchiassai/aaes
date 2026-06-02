@@ -8,9 +8,18 @@
  */
 const BASE = import.meta.env.BASE_URL;
 
-/** Full URL for a past-event photo, e.g. photoUrl("2019-1") → /aaes/photos/2019-1.jpg */
+/**
+ * Past-event photos are NOT shipped in the deploy. They live in the repo's
+ * top-level `photos/` dir and are served at runtime by the jsDelivr CDN, which
+ * mirrors the GitHub repo. This keeps the deployed `dist/` artifact small while
+ * still loading photos lazily (FilmImg sets loading="lazy"). Note: jsDelivr
+ * resolves `@main` against the latest commit, so new/changed photos must be
+ * pushed (and may take a few minutes to propagate) before they appear.
+ * e.g. photoUrl("2019-1") → https://cdn.jsdelivr.net/gh/lilianchiassai/aaes@main/photos/2019-1.jpg
+ */
+const PHOTO_CDN = "https://cdn.jsdelivr.net/gh/lilianchiassai/aaes@main/photos";
 export function photoUrl(name: string): string {
-  return `${BASE}photos/${name}.jpg`;
+  return `${PHOTO_CDN}/${name}.jpg`;
 }
 
 /** Full URL for a static asset in public/assets, e.g. assetUrl("logo-aaes.png") */

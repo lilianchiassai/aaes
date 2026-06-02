@@ -42,6 +42,8 @@ function Splatter({ n }: { n: string }) {
   if (!src) return null;
   return (
     <img
+      loading="lazy"
+      decoding="async"
       className="absolute inset-0 z-0 pointer-events-none block w-full h-full"
       src={src}
       alt=""

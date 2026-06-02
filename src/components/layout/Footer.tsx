@@ -16,7 +16,7 @@ export function Footer({ extraLegal }: { extraLegal?: string }) {
         <div className="grid grid-cols-1 znav:grid-cols-[1.5fr_1fr_1fr] gap-[38px]">
           <div>
             <div className="flex items-center gap-3 mb-[14px]">
-              <img src={assetUrl("logo-aaes.png")} alt="AAES" className="w-[50px] h-[50px]" />
+              <img src={assetUrl("logo-aaes.png")} alt="AAES" loading="lazy" decoding="async" className="w-[50px] h-[50px]" />
               <b className="font-display text-3xl text-white uppercase leading-none">AAES</b>
             </div>
             <p className="font-body text-lg text-grey-100 leading-[1.45] m-0">
