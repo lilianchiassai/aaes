@@ -32,7 +32,7 @@ function RuleItem({ children }: { children: ReactNode }) {
 export function Rules() {
   return (
     <>
-      <PageHead title="Regles" screenLabel="Règles — En-tête" image={assetUrl("hand-sil-yellow.png")}>
+      <PageHead title="Règles" screenLabel="Règles — En-tête" image={assetUrl("hand-sil-yellow.png")}>
         Lisez attentivement avant de vous présenter. Le respect du règlement garantit une nuit
         réussie — pour les humains comme pour les zombies.
       </PageHead>
@@ -41,7 +41,7 @@ export function Rules() {
 
       <Section ground="concrete">
         <Container width="article">
-          <RuleBlock title="Presentation">
+          <RuleBlock title="Présentation">
             <RuleItem>
               Au cours d'un Zombie Survival, les participants sont confrontés à une invasion zombie.
             </RuleItem>
@@ -56,7 +56,7 @@ export function Rules() {
             </RuleItem>
           </RuleBlock>
 
-          <RuleBlock title="Deroulement">
+          <RuleBlock title="Déroulement">
             <RuleItem>Arrivez 15 minutes avant l'heure de début prévue.</RuleItem>
             <RuleItem>
               À votre arrivée, un <Red>panier repas</Red> vous est remis pour ne pas avoir faim
@@ -115,7 +115,7 @@ export function Rules() {
             </RuleItem>
           </RuleBlock>
 
-          <RuleBlock title="Materiel">
+          <RuleBlock title="Matériel">
             <RuleItem>
               Les participants amènent leur propre matériel&nbsp;: gants, vêtements de pluie,
               vêtements salissables, chaussures de sport, eau, sac à dos, etc.
@@ -126,7 +126,7 @@ export function Rules() {
             </RuleItem>
           </RuleBlock>
 
-          <RuleBlock title="Securite">
+          <RuleBlock title="Sécurité">
             <RuleItem>
               Une <Red>infirmerie</Red> est installée au camp zombie.
             </RuleItem>
@@ -139,7 +139,7 @@ export function Rules() {
             <RuleItem>Les armes sont interdites.</RuleItem>
           </RuleBlock>
 
-          <RuleBlock title="Regles importantes">
+          <RuleBlock title="Règles importantes">
             <RuleItem>
               L'<Red>équipe d'organisation</Red> ne souhaite qu'une chose&nbsp;: vous faire passer
               une soirée réussie. Elle a toujours raison, et il est primordial de la respecter. Elle

@@ -232,7 +232,7 @@ export function Inscription() {
               <div className="absolute inset-0 z-[5] bg-[rgba(6,6,6,0.93)] flex flex-col items-center justify-center text-center p-10 gap-[14px] backdrop-blur-[3px]">
                 <div className="text-5xl">🔒</div>
                 <div className="font-display text-4xl uppercase text-white leading-[0.95]">
-                  Inscription verrouillee
+                  Inscription verrouillée
                 </div>
                 <div className="font-body text-lg text-grey-100 max-w-[38ch]">
                   Lisez le règlement ci-dessus, puis cochez les deux confirmations pour débloquer le
