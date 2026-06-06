@@ -47,7 +47,7 @@ const PARC_DU_BIEZ: EventLocation = {
   postalCode: "14120",
   addressNote:
     "Rendez-vous à l'entrée du parc dès 18h45. Stationnement à proximité.",
-  mapsUrl: "https://maps.app.goo.gl/GLzU4qhYdh8LCHRG8",
+  mapsUrl: "https://maps.app.goo.gl/ZGNxUskhiY4NdAjX6",
   mapsEmbedUrl: "https://www.google.com/maps?q=Parc+du+Biez,+Mondeville+14120&output=embed",
 };
 
