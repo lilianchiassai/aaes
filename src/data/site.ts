@@ -46,7 +46,7 @@ const PARC_DU_BIEZ: EventLocation = {
   city: "Mondeville",
   postalCode: "14120",
   addressNote:
-    "Rendez-vous à l'entrée du parc dès 19h45. Stationnement à proximité.",
+    "Rendez-vous à l'entrée du parc dès 18h45. Stationnement à proximité.",
   mapsUrl: "https://maps.app.goo.gl/GLzU4qhYdh8LCHRG8",
   mapsEmbedUrl: "https://www.google.com/maps?q=Parc+du+Biez,+Mondeville+14120&output=embed",
 };
@@ -54,10 +54,10 @@ const PARC_DU_BIEZ: EventLocation = {
 export const UPCOMING: UpcomingEdition = {
   kicker: "L'AAES présente · Édition 2026",
   title: "Z Survival Night",
-  countdownTarget: "2026-09-12T20:00:00",
-  dateLong: "Sam. 12 Septembre 2026 · 20h00",
+  countdownTarget: "2026-09-12T19:00:00",
+  dateLong: "Sam. 12 Septembre 2026 · 19h00",
   dateShort: "Sam. 12 sept.",
-  time: "20h00",
+  time: "19h00",
   location: PARC_DU_BIEZ,
   durationLabel: "+3 heures",
   participantsLabel: "100 participants",

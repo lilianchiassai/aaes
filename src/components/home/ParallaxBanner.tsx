@@ -3,7 +3,7 @@ import { Fragment } from "react";
 /* The floating caution-tape banner that straddles the hero→concrete seam.
    Strips translate on X with scroll (useScrollParallax reads data-factor). */
 
-const HAZARD_ITEMS = ["Parc du Biez", "Mondeville", "12 Septembre 2026", "20H00", "15 €"];
+const HAZARD_ITEMS = ["Parc du Biez", "Mondeville", "12 Septembre 2026", "19H00", "15 €"];
 const TAG_ITEMS = [
   "Tout est sous contrôle",
   "Jeu de rôle grandeur nature",

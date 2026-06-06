@@ -158,7 +158,7 @@ export function Rules() {
           </RuleBlock>
 
           <div className="bg-hazard text-black px-[26px] py-[22px] border-2 border-black shadow-hard font-cond font-semibold uppercase tracking-[0.04em] text-lg leading-[1.4]">
-            ☞ Tout est sous contrôle. Rendez-vous le 12 septembre 2026, 20h, au Parc du Biez.
+            ☞ Tout est sous contrôle. Rendez-vous le 12 septembre 2026, 19h, au Parc du Biez.
           </div>
 
           <div className="mt-[34px] flex gap-4 flex-wrap">
