@@ -71,7 +71,7 @@ export function Events() {
                   href={UPCOMING.location.mapsUrl}
                   target="_blank"
                   rel="noopener"
-                  className="relative block mt-1.5 min-h-[200px] overflow-hidden border-2 border-cyan bg-[#111]"
+                  className="relative block min-h-[200px] overflow-hidden bg-[#111]"
                   aria-label={`Carte — ${UPCOMING.location.venue}, ${UPCOMING.location.city} (ouvrir dans Google Maps)`}
                 >
                   <iframe
