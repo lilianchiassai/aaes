@@ -67,6 +67,21 @@ export function Events() {
                 <Recap n="+16" l="Âge minimum" />
                 <Recap n="+3h" l="De jeu, en pleine nuit" />
                 <Recap n={<span className="text-2xl">Parc du Biez</span>} l="Mondeville" />
+                <a
+                  href={UPCOMING.location.mapsUrl}
+                  target="_blank"
+                  rel="noopener"
+                  className="relative block mt-1.5 min-h-[200px] overflow-hidden border-2 border-cyan bg-[#111]"
+                  aria-label={`Carte — ${UPCOMING.location.venue}, ${UPCOMING.location.city} (ouvrir dans Google Maps)`}
+                >
+                  <iframe
+                    title={`Carte — ${UPCOMING.location.venue}, ${UPCOMING.location.city}`}
+                    src={UPCOMING.location.mapsEmbedUrl}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="absolute inset-0 w-full h-full border-0 block pointer-events-none [filter:invert(0.9)_hue-rotate(180deg)_brightness(0.95)_contrast(0.9)_grayscale(0.3)]"
+                  />
+                </a>
               </div>
             </div>
           </div>
