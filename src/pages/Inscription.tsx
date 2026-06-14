@@ -14,16 +14,18 @@ const Red = ({ children }: { children: React.ReactNode }) => (
 /** Numbered hazard-striped step bar (the gate's "01"/"02" headers). */
 function StepHead({ n, title, className = "" }: { n: string; title: string; className?: string }) {
   return (
-    <div
-      className={
-        "flex items-center gap-[14px] px-6 py-[18px] bg-[repeating-linear-gradient(-45deg,#141414_0_14px,#0c0c0c_14px_28px)] " +
-        className
-      }
-    >
-      <span className="font-display text-3xl text-hazard">{n}</span>
-      <Kicker tone="white" size="lg" tracking="tight">
-        {title}
-      </Kicker>
+    <div className={"flex items-stretch " + className}>
+      {/* Left stripes — 60px, desktop only */}
+      <div className="hidden sm:block w-[60px] border-r-4 border-black bg-[repeating-linear-gradient(-45deg,#f5e000_0_14px,#0c0c0c_14px_28px)]" />
+      {/* Middle block — title, black on hazard yellow */}
+      <div className="flex items-center gap-[14px] px-6 py-[18px] bg-hazard border-r-4 border-black">
+        <span className="font-display text-3xl text-black">{n}</span>
+        <Kicker tone="white" size="lg" tracking="tight" className="text-black">
+          {title}
+        </Kicker>
+      </div>
+      {/* Right stripes — fills rest */}
+      <div className="flex-1 bg-[repeating-linear-gradient(-45deg,#f5e000_0_14px,#0c0c0c_14px_28px)]" />
     </div>
   );
 }
@@ -91,12 +93,12 @@ export function Inscription() {
           {open && (
           <>
           {/* ===== STEP 1 — READ & AGREE ===== */}
-          <div className="bg-[#0c0c0c] border-2 border-black shadow-hard mb-6">
+          <div className="bg-[#0c0c0c] border-2 border-black border-t-0 border-l-4 border-l-hazard shadow-hard mb-6">
             <StepHead n="01" title="Lisez le règlement" className="border-b-2 border-black" />
 
             <div
               ref={scrollRef}
-              className="max-h-[300px] overflow-y-auto px-[26px] py-6 border-b border-dashed border-hairline [scrollbar-width:thin] [&_h4]:font-cond [&_h4]:font-semibold [&_h4]:uppercase [&_h4]:tracking-[0.08em] [&_h4]:text-hazard [&_h4]:text-[13px] [&_h4]:mt-[18px] [&_h4]:mb-2 [&_h4:first-child]:mt-0 [&_p]:font-body [&_p]:text-[19px] [&_p]:text-grey-100 [&_p]:leading-[1.55] [&_li]:font-body [&_li]:text-[19px] [&_li]:text-grey-100 [&_li]:leading-[1.55] [&_ul]:mb-[6px] [&_ul]:pl-[18px]"
+              className="max-h-[500px] overflow-y-auto px-[26px] py-6 border-b border-dashed border-hairline [scrollbar-width:thin] [&_h4]:font-cond [&_h4]:font-semibold [&_h4]:uppercase [&_h4]:tracking-[0.08em] [&_h4]:text-hazard [&_h4]:text-[13px] [&_h4]:mt-[18px] [&_h4]:mb-2 [&_h4:first-child]:mt-0 [&_p]:font-body [&_p]:text-[19px] [&_p]:text-grey-100 [&_p]:leading-[1.55] [&_li]:font-body [&_li]:text-[19px] [&_li]:text-grey-100 [&_li]:leading-[1.55] [&_ul]:mb-[6px] [&_ul]:pl-[18px]"
             >
               <h4>Présentation</h4>
               <p>
@@ -163,7 +165,7 @@ export function Inscription() {
                 <a href="#/regles" className="text-hazard">
                   Règles
                 </a>
-                . — Vous arrivez au bout du résumé. ☞
+                .
               </p>
             </div>
 
@@ -216,8 +218,8 @@ export function Inscription() {
                 className="w-[26px] h-[26px] flex-none accent-hazard mt-[2px] cursor-pointer"
               />
               <span className="font-body text-lg text-white leading-[1.4]">
-                Je certifie avoir 18 ans ou plus — ou, si j'ai entre 16 et 18 ans, je fournirai une
-                autorisation parentale signée le soir de l'événement.
+                Je certifie avoir 18 ans ou plus — ou, si j'ai entre 16 et 18 ans, j'enverrai une
+                autorisation parentale signée à asso.aaes@gmail.com.
                 <span className="block text-fg2 text-sm mt-[2px]">
                   Obligatoire · Interdit aux −16 ans
                 </span>
@@ -226,29 +228,31 @@ export function Inscription() {
           </div>
 
           {/* ===== STEP 2 — REGISTER (HelloAsso) ===== */}
-          <StepHead n="02" title="Réservez votre place · 15 €" className="border-2 border-black border-b-0" />
-          <div className="relative border-2 border-black shadow-hard bg-[#0c0c0c] p-2">
-            {!unlocked && (
-              <div className="absolute inset-0 z-[5] bg-[rgba(6,6,6,0.93)] flex flex-col items-center justify-center text-center p-10 gap-[14px] backdrop-blur-[3px]">
-                <div className="text-5xl">🔒</div>
-                <div className="font-display text-4xl uppercase text-white leading-[0.95]">
-                  Inscription verrouillée
+          <div className="border-2 border-black border-t-0 border-l-4 border-l-hazard shadow-hard bg-[#0c0c0c]">
+            <StepHead n="02" title="Réservez votre place · 15 €" className="border-b-2 border-black" />
+            <div className="relative p-2">
+              {!unlocked && (
+                <div className="absolute inset-0 z-[5] bg-[rgba(6,6,6,0.93)] flex flex-col items-center justify-center text-center p-10 gap-[14px] backdrop-blur-[3px]">
+                  <div className="text-5xl">🔒</div>
+                  <div className="font-display text-4xl uppercase text-white leading-[0.95]">
+                    Inscription verrouillée
+                  </div>
+                  <div className="font-body text-lg text-grey-100 max-w-[38ch]">
+                    Lisez le règlement ci-dessus, puis cochez les deux confirmations pour débloquer le
+                    formulaire HelloAsso.
+                  </div>
                 </div>
-                <div className="font-body text-lg text-grey-100 max-w-[38ch]">
-                  Lisez le règlement ci-dessus, puis cochez les deux confirmations pour débloquer le
-                  formulaire HelloAsso.
-                </div>
-              </div>
-            )}
-            <iframe
-              ref={iframeRef}
-              title="Inscription HelloAsso"
-              allowTransparency
-              scrolling="auto"
-              src={siteConfig.helloAssoWidget}
-              className="block w-full border-0 bg-white"
-              style={{ height: "750px" }}
-            />
+              )}
+              <iframe
+                ref={iframeRef}
+                title="Inscription HelloAsso"
+                allowTransparency
+                scrolling="auto"
+                src={siteConfig.helloAssoWidget}
+                className="block w-full border-0 bg-white"
+                style={{ height: "750px" }}
+              />
+            </div>
           </div>
 
           <p className="font-cond text-xs tracking-[0.08em] uppercase text-fg2 mt-4 text-center">
