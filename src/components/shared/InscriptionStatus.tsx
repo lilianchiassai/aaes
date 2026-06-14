@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { Kicker } from "../ui/Kicker";
 import { Button } from "../ui/Button";
-import { FacebookIcon, InstagramIcon, LinkIcon, BellIcon, LockIcon } from "../ui/icons";
+import { FacebookIcon, LinkIcon, BellIcon, LockIcon } from "../ui/icons";
 import {
   UPCOMING,
   siteConfig,
@@ -91,14 +91,6 @@ export function InscriptionStatus({
             rel="noopener noreferrer"
           >
             <FacebookIcon /> Facebook
-          </a>
-          <a
-            className={panelGhost}
-            href={siteConfig.social.instagram}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <InstagramIcon /> Instagram
           </a>
           <CopyLinkButton />
           <a

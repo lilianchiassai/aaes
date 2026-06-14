@@ -96,9 +96,7 @@ export const siteConfig = {
   helloAssoWidget:
     "https://www.helloasso.com/associations/amicale-des-amateurs-d-excursions-scenarisees-aaes/evenements/z-survival-night-12-septembre-2026-1/widget",
   associationName: "Amicale des Amateurs d'Excursions Scénarisées",
-  // TODO(AAES): replace with the real AAES Facebook / Instagram pages.
   social: {
-    facebook: "https://www.facebook.com/",
-    instagram: "https://www.instagram.com/",
+    facebook: "https://www.facebook.com/AAESZombie",
   },
 };
