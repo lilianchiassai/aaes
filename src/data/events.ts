@@ -122,7 +122,7 @@ export const ZEVENTS: ZEvent[] = [
     fact: "300 joueurs — le plus grand rassemblement jamais lâché dans la nuit par l'AAES.",
     trailer: "x_KsK1fEIZ0",
     blurb:
-      "Première édition à porter le nom de Z Survival Night, et la plus massive de toutes : 300 joueurs lâchés dans la Vallée des Jardins, à Caen, sur fond de décor médiéval. Factions rivales, morts-vivants et quêtes nocturnes dans le plus grand rassemblement jamais organisé par l'AAES.",
+      "Scientifiques, fanatiques religieux et survivalistes tentent de survivre à une épidémie venue du Moyen-Âge.",
     photos: ["2017-1", "2017-2", "2017-3", "2017-4", "2017-5", "2017-6", "2017-7", "2017-8"],
   },
   {
