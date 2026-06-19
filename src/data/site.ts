@@ -98,5 +98,6 @@ export const siteConfig = {
   associationName: "Amicale des Amateurs d'Excursions Scénarisées",
   social: {
     facebook: "https://www.facebook.com/AAESZombie",
+    instagram: "https://www.instagram.com/asso.aaes",
   },
 };
