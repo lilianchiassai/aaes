@@ -2,7 +2,6 @@ import type { ReactNode } from "react";
 import { Section, Container, TapeDivider } from "../components/ui/Section";
 import { Button } from "../components/ui/Button";
 import { PageHead } from "../components/ui/PageHead";
-import { assetUrl } from "../lib/assets";
 
 const Red = ({ children }: { children: ReactNode }) => (
   <span className="text-hazard font-normal">{children}</span>
@@ -32,7 +31,7 @@ function RuleItem({ children }: { children: ReactNode }) {
 export function Rules() {
   return (
     <>
-      <PageHead title="Règles" screenLabel="Règles — En-tête" image={assetUrl("hand-sil-yellow.png")}>
+      <PageHead title="Règles" screenLabel="Règles — En-tête" hands="right">
         Lisez attentivement avant de vous présenter. Le respect du règlement garantit une nuit
         réussie — pour les humains comme pour les zombies.
       </PageHead>
@@ -121,8 +120,11 @@ export function Rules() {
               vêtements salissables, chaussures de sport, eau, sac à dos, etc.
             </RuleItem>
             <RuleItem>
-              Les lampes à LED pouvant éblouir les participants sont interdites. Seules les{" "}
-              <Red>lampes torches</Red> à filament non éblouissantes sont autorisées.
+              Les <Red>lampes éblouissantes</Red> (plus de 30 lumens), y compris les lampes de
+              téléphone, sont interdites. Sont autorisées&nbsp;: les lampes à lumière rouge, les
+              lampes à filament et les lampes de faible intensité (moins de 30 lumens). Si vous n'en
+              avez pas, une lampe peut vous être prêtée à l'inscription contre une caution de
+              5&nbsp;€.
             </RuleItem>
           </RuleBlock>
 

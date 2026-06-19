@@ -2,7 +2,6 @@ import type { ReactNode } from "react";
 import { Section, Container, TapeDivider } from "../components/ui/Section";
 import { Button } from "../components/ui/Button";
 import { PageHead } from "../components/ui/PageHead";
-import { assetUrl } from "../lib/assets";
 
 const Red = ({ children }: { children: ReactNode }) => (
   <span className="text-hazard font-normal">{children}</span>
@@ -25,7 +24,7 @@ function AboutBlock({ title, children }: { title: ReactNode; children: ReactNode
 export function About() {
   return (
     <>
-      <PageHead title="À propos" screenLabel="À propos — En-tête" image={assetUrl("hand-sil-yellow.png")}>
+      <PageHead title="À propos" screenLabel="À propos — En-tête" hands="left">
         L'AAES — l'Amicale des Amateurs d'Excursions Scénarisées. Des amis, une
         invasion zombie, et l'envie de remettre ça.
       </PageHead>

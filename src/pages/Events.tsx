@@ -20,7 +20,7 @@ export function Events() {
 
   return (
     <>
-      <PageHead title="Événements" screenLabel="Événements — En-tête">
+      <PageHead title="Événements" screenLabel="Événements — En-tête" hands="left">
         De la Vallée des Jardins au Parc du Biez, retour sur les nuits où l'AAES a lâché la horde —
         et l'édition qui marque le grand retour.
       </PageHead>

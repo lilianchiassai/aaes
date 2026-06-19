@@ -10,6 +10,7 @@ import { Kicker } from "../components/ui/Kicker";
 import { FilmImg } from "../components/ui/FilmImg";
 import { getEvent } from "../data/events";
 import { photoUrl, youtubeThumb, youtubeEmbed } from "../lib/assets";
+import { HeaderHands } from "../components/ui/HeaderHands";
 
 export function EventDetail() {
   const { id } = useParams();
@@ -51,6 +52,7 @@ export function EventDetail() {
           </div>
         )}
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.55),#070707)]" />
+        <HeaderHands variant="left" />
         <Container className="relative">
           <Button
             variant="ghost"

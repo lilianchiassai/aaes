@@ -11,6 +11,7 @@ const EventDetail = lazy(() => import("./pages/EventDetail").then((m) => ({ defa
 const Rules = lazy(() => import("./pages/Rules").then((m) => ({ default: m.Rules })));
 const Inscription = lazy(() => import("./pages/Inscription").then((m) => ({ default: m.Inscription })));
 const About = lazy(() => import("./pages/About").then((m) => ({ default: m.About })));
+const Benevoles = lazy(() => import("./pages/Benevoles").then((m) => ({ default: m.Benevoles })));
 
 export default function App() {
   return (
@@ -24,6 +25,7 @@ export default function App() {
             <Route path="regles" element={<Rules />} />
             <Route path="inscription" element={<Inscription />} />
             <Route path="a-propos" element={<About />} />
+            <Route path="benevoles" element={<Benevoles />} />
           </Route>
         </Routes>
       </Suspense>

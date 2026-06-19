@@ -6,6 +6,7 @@ import { LocationBlock } from "../components/shared/LocationBlock";
 import { UpcomingFacts } from "../components/shared/UpcomingFacts";
 import { InscriptionStatus } from "../components/shared/InscriptionStatus";
 import { siteConfig, UPCOMING, inscriptionIsOpen } from "../data/site";
+import { assetUrl } from "../lib/assets";
 
 const Red = ({ children }: { children: React.ReactNode }) => (
   <span className="text-hazard font-normal">{children}</span>
@@ -74,7 +75,7 @@ export function Inscription() {
 
   return (
     <>
-      <PageHead title="S'inscrire" screenLabel="Inscription — En-tête">
+      <PageHead title="S'inscrire" screenLabel="Inscription — En-tête" hands="right">
         {open
           ? "Avant de réserver, vous devez lire le règlement et accepter les conditions. Faites défiler le résumé ci-dessous jusqu'au bout, cochez la case, puis l'inscription se débloque."
           : "La billetterie de l'édition 2026 n'est pas encore en ligne. Voici les infos pratiques — et comment être prévenu dès l'ouverture."}
@@ -143,8 +144,9 @@ export function Inscription() {
                   sport, eau, sac à dos.
                 </li>
                 <li>
-                  Lampes LED éblouissantes interdites — seules les lampes torches à filament non
-                  éblouissantes sont autorisées.
+                  Lampes éblouissantes (plus de 30 lumens) et lampes de téléphone interdites.
+                  Autorisées : lampes à lumière rouge, à filament ou de faible intensité (moins de
+                  30 lumens). Lampe prêtée à l'inscription contre une caution de 5 €.
                 </li>
               </ul>
 
@@ -198,7 +200,7 @@ export function Inscription() {
               <span className="font-body text-lg text-white leading-[1.4]">
                 J'ai lu et j'accepte le règlement de Z Survival Night.
                 <span className="block text-fg2 text-sm mt-[2px]">
-                  Obligatoire pour débloquer l'inscription · Interdit aux −16 ans
+                  Obligatoire pour débloquer l'inscription
                 </span>
               </span>
             </label>
@@ -226,6 +228,30 @@ export function Inscription() {
               </span>
             </label>
           </div>
+
+          {/* ===== BÉNÉVOLES CTA ===== */}
+          <a
+            href="#/benevoles"
+            className="group flex items-center gap-5 py-5 mb-6"
+          >
+            <img
+              src={assetUrl("hands-left-y.svg")}
+              alt=""
+              aria-hidden="true"
+              className="w-14 h-14 flex-none object-contain -scale-x-100"
+            />
+            <span className="flex-1">
+              <span className="block font-display text-2xl uppercase text-white leading-[1.05]">
+                Et si vous passiez de l'autre côté ?
+              </span>
+              <span className="block font-body text-base text-grey-100 mt-1 leading-[1.4]">
+                Rejoignez notre équipe pour vivre la soirée de l'intérieur.
+              </span>
+            </span>
+            <span className="hidden sm:block font-cond text-xs tracking-[0.12em] uppercase text-cyan flex-none group-hover:translate-x-1 transition-transform">
+              Devenir bénévole →
+            </span>
+          </a>
 
           {/* ===== STEP 2 — REGISTER (HelloAsso) ===== */}
           <div className="border-2 border-black border-t-0 border-l-4 border-l-hazard shadow-hard bg-[#0c0c0c]">

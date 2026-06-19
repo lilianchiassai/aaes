@@ -50,6 +50,9 @@ export function Footer({ extraLegal }: { extraLegal?: string }) {
             <Link to="/evenements" className={colLink}>
               Nos événements
             </Link>
+            <Link to="/benevoles" className={colLink}>
+              Bénévoles
+            </Link>
             <a
               href={siteConfig.mapsUrl}
               target="_blank"
