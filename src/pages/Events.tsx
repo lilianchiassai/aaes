@@ -4,7 +4,7 @@ import { PageHead } from "../components/ui/PageHead";
 import { Kicker } from "../components/ui/Kicker";
 import { EventCard2 } from "../components/events/EventCard2";
 import { eventsByYear } from "../data/events";
-import { UPCOMING } from "../data/site";
+import { UPCOMING, siteConfig, inscriptionIsFull } from "../data/site";
 
 function Recap({ n, l }: { n: React.ReactNode; l: string }) {
   return (
@@ -17,6 +17,7 @@ function Recap({ n, l }: { n: React.ReactNode; l: string }) {
 
 export function Events() {
   const groups = eventsByYear();
+  const full = inscriptionIsFull();
 
   return (
     <>
@@ -37,7 +38,7 @@ export function Events() {
             <div className="grid grid-cols-[1.2fr_0.8fr] max-zmd:grid-cols-1">
               <div className="px-9 py-[34px]">
                 <Kicker tone="cyan" tracking="wide" className="block">
-                  À venir · Samedi 12 septembre 2026 · 19h00
+                  {full ? "Complet · " : "À venir · "}Samedi 12 septembre 2026 · 19h00
                 </Kicker>
                 <div className="font-display text-[clamp(36px,4.6vw,60px)] uppercase text-white leading-[0.9] mt-2 mb-[14px]">
                   Z Survival Night
@@ -52,10 +53,31 @@ export function Events() {
                     {para}
                   </p>
                 ))}
+                {full && (
+                  <p className="font-body text-2xl text-cyan leading-[1.5] max-w-[72ch] mt-4">
+                    Les {UPCOMING.participantsLabel} sont au complet — la billetterie est fermée.
+                    Suivez-nous sur{" "}
+                    <a
+                      href={siteConfig.social.instagram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline decoration-2 underline-offset-4"
+                    >
+                      Instagram
+                    </a>{" "}
+                    pour les désistements de dernière minute et la prochaine édition.
+                  </p>
+                )}
                 <div className="mt-5 flex gap-[14px] flex-wrap">
-                  <Button variant="primary" to="/inscription">
-                    S'inscrire · 15 €
-                  </Button>
+                  {full ? (
+                    <Button variant="cyan" to="/inscription">
+                      Complet — en savoir plus
+                    </Button>
+                  ) : (
+                    <Button variant="primary" to="/inscription">
+                      S'inscrire · 15 €
+                    </Button>
+                  )}
                   <Button variant="ghost" to="/regles">
                     Lire les règles
                   </Button>

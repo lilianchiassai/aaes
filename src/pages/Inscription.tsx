@@ -5,7 +5,8 @@ import { Kicker } from "../components/ui/Kicker";
 import { LocationBlock } from "../components/shared/LocationBlock";
 import { UpcomingFacts } from "../components/shared/UpcomingFacts";
 import { InscriptionStatus } from "../components/shared/InscriptionStatus";
-import { siteConfig, UPCOMING, inscriptionIsOpen } from "../data/site";
+import { EventFullNotice } from "../components/shared/EventFullNotice";
+import { siteConfig, UPCOMING, inscriptionIsOpen, inscriptionIsFull } from "../data/site";
 import { assetUrl } from "../lib/assets";
 
 const Red = ({ children }: { children: React.ReactNode }) => (
@@ -39,7 +40,8 @@ export function Inscription() {
   const [agreeAge, setAgreeAge] = useState(false);
 
   const unlocked = agree && agreeAge;
-  const open = inscriptionIsOpen();
+  const full = inscriptionIsFull();
+  const open = !full && inscriptionIsOpen();
 
   // Unlock the first checkbox once the rules summary is scrolled to the end
   // (or immediately if it fits without scrolling).
@@ -76,9 +78,11 @@ export function Inscription() {
   return (
     <>
       <PageHead title="S'inscrire" screenLabel="Inscription — En-tête" hands="right">
-        {open
-          ? "Avant de réserver, vous devez lire le règlement et accepter les conditions. Faites défiler le résumé ci-dessous jusqu'au bout, cochez la case, puis l'inscription se débloque."
-          : "La billetterie de l'édition 2026 n'est pas encore en ligne. Voici les infos pratiques — et comment être prévenu dès l'ouverture."}
+        {full
+          ? "L'édition 2026 est complète : toutes les places sont prises et la billetterie est fermée. Voici les infos pratiques — et comment rester informé pour la suite."
+          : open
+            ? "Avant de réserver, vous devez lire le règlement et accepter les conditions. Faites défiler le résumé ci-dessous jusqu'au bout, cochez la case, puis l'inscription se débloque."
+            : "La billetterie de l'édition 2026 n'est pas encore en ligne. Voici les infos pratiques — et comment être prévenu dès l'ouverture."}
       </PageHead>
 
       <TapeDivider />
@@ -89,7 +93,7 @@ export function Inscription() {
           <UpcomingFacts className="mb-6" />
           <LocationBlock location={UPCOMING.location} className="mb-8" />
 
-          {!open && <InscriptionStatus />}
+          {full ? <EventFullNotice /> : !open && <InscriptionStatus />}
 
           {open && (
           <>

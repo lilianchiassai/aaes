@@ -7,13 +7,14 @@ import { Kicker } from "../components/ui/Kicker";
 import { LocationBlock } from "../components/shared/LocationBlock";
 import { UpcomingFacts } from "../components/shared/UpcomingFacts";
 import { InscriptionStatus } from "../components/shared/InscriptionStatus";
+import { EventFullNotice } from "../components/shared/EventFullNotice";
 import { EventCard2 } from "../components/events/EventCard2";
 import { ParallaxBanner } from "../components/home/ParallaxBanner";
 import { NightTimeline } from "../components/home/NightTimeline";
 import { LockIcon } from "../components/ui/icons";
 import { useCountdown } from "../hooks/useCountdown";
 import { useScrollParallax } from "../hooks/useScrollParallax";
-import { UPCOMING, inscriptionIsOpen } from "../data/site";
+import { UPCOMING, inscriptionIsOpen, inscriptionIsFull } from "../data/site";
 import { ZEVENTS } from "../data/events";
 import { assetUrl } from "../lib/assets";
 
@@ -24,7 +25,8 @@ const HOME_EVENTS = ZEVENTS.slice(0, 3);
 export function Home() {
   const cd = useCountdown(UPCOMING.countdownTarget);
   useScrollParallax();
-  const open = inscriptionIsOpen();
+  const full = inscriptionIsFull();
+  const open = !full && inscriptionIsOpen();
 
   const description = (
     <>
@@ -107,11 +109,17 @@ export function Home() {
               </p>
             ))}
             <div className="flex gap-4 flex-wrap items-center mt-[14px]">
-              {open ? (
+              {open && (
                 <Button variant="primary" to="/inscription">
                   S'inscrire · {UPCOMING.priceLabel}
                 </Button>
-              ) : (
+              )}
+              {full && (
+                <Button variant="cyan" to="/inscription">
+                  Complet — en savoir plus
+                </Button>
+              )}
+              {!open && !full && (
                 <span className="inline-flex items-center gap-[10px] font-impact uppercase text-lg leading-none px-[22px] py-[13px] border-2 border-cyan text-cyan">
                   <LockIcon /> Inscriptions dès le {UPCOMING.inscriptionOpenLabel}
                 </span>
@@ -217,6 +225,8 @@ export function Home() {
                 </Button>
               </div>
             </>
+          ) : full ? (
+            <EventFullNotice />
           ) : (
             <InscriptionStatus />
           )}
