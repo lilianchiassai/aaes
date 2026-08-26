@@ -67,7 +67,7 @@ export const UPCOMING: UpcomingEdition = {
   priceLabel: "15 €",
   inscriptionOpenAt: "2026-06-13T10:00:00",
   inscriptionOpenLabel: "13 juin 2026",
-  isFull: true,
+  isFull: false,
   heroBlurb: [
     "Les morts sont revenus à la vie, et ils ont faim. Sept ans après notre dernière Soirée Zombie, l'AAES reprend du service : le temps d'une nuit, rejoignez un groupe de rescapés livré à lui-même. Plus de trois heures d'action, d'angoisse et d'adrénaline au Parc du Biez à Mondeville. Si vous êtes mordus, devenez zombie.",
     "Votre objectif : survivre.",
